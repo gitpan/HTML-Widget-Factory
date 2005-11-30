@@ -13,7 +13,7 @@ HTML::Widget::Plugin::Select - a widget for selection from a list
 
 version 0.01
 
- $Id: /my/icg/widget/trunk/lib/HTML/Widget/Plugin/Select.pm 16605 2005-11-22T03:53:14.431444Z rjbs  $
+ $Id: /my/icg/widget/trunk/lib/HTML/Widget/Plugin/Select.pm 16769 2005-11-29T17:50:44.157832Z rjbs  $
 
 =cut
 
@@ -91,6 +91,8 @@ in the exported widget-constructing call.  It's here for subclasses to exploit.
 
 sub build {
   my ($self, $factory, $arg) = @_;
+  $arg->{attr}{name} ||= $arg->{attr}{id};
+
   my $widget = HTML::Element->new('select');
 
   my @options;

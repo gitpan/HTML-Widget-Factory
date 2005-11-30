@@ -13,7 +13,7 @@ HTML::Widget::Plugin::Checkbox - it's either [ ] or [x]
 
 version 0.01
 
- $Id: /my/icg/widget/trunk/lib/HTML/Widget/Plugin/Checkbox.pm 16526 2005-11-20T17:02:21.688966Z rjbs  $
+ $Id: /my/icg/widget/trunk/lib/HTML/Widget/Plugin/Checkbox.pm 16769 2005-11-29T17:50:44.157832Z rjbs  $
 
 =cut
 
@@ -55,13 +55,16 @@ Otherwise, it is not.
 
 =cut
 
-sub _attribute_args { qw(checked) }
-sub _boolean_args   { qw(checked) }
+sub _attribute_args { qw(checked value) }
+sub _boolean_args   { qw(checked value) }
 
 sub checkbox {
   my ($self, $factory, $arg) = @_;
 
+  my $value = delete $arg->{attr}{value};
+  $arg->{attr}{checked} ||= $value;
   $arg->{attr}{type} = 'checkbox';
+  $arg->{attr}{name} ||= $arg->{attr}{id};
 
   my $widget = HTML::Element->new('input');
 

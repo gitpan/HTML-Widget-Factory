@@ -13,7 +13,7 @@ HTML::Widget::Plugin::Multiselect - widget for multiple selections from a list
 
 version 0.01
 
- $Id: /my/icg/widget/trunk/lib/HTML/Widget/Plugin/Multiselect.pm 16605 2005-11-22T03:53:14.431444Z rjbs  $
+ $Id: /my/icg/widget/trunk/lib/HTML/Widget/Plugin/Multiselect.pm 16769 2005-11-29T17:50:44.157832Z rjbs  $
 
 =cut
 
@@ -60,7 +60,7 @@ sub _attribute_args { qw(size) }
 sub multiselect {
   my ($self, $factory, $arg) = @_;
 
-  $arg->{attr}{multiple} = 'multiple';
+  $arg->{attr}{name} ||= $arg->{attr}{id};
 
   if ($arg->{values}) {
     $arg->{value} = delete $arg->{values};

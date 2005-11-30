@@ -12,7 +12,7 @@ HTML::Widget::Plugin - base class for HTML widgets
 
 version 0.01
 
- $Id: /my/icg/widget/trunk/lib/HTML/Widget/Plugin.pm 16524 2005-11-20T16:52:02.029288Z rjbs  $
+ $Id: /my/icg/widget/trunk/lib/HTML/Widget/Plugin.pm 16769 2005-11-29T17:50:44.157832Z rjbs  $
 
 =cut
 
@@ -78,7 +78,7 @@ sub attribute_args {
   return uniq @attributes;
 }   
 
-sub _attribute_args { qw(name class) }
+sub _attribute_args { qw(id name class) }
 
 =head2 C< boolean_args >
 

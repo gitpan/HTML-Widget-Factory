@@ -10,13 +10,13 @@ HTML::Widget::Factory - churn out HTML widgets
 
 =head1 VERSION
 
-version 0.01
+version 0.02
 
- $Id: /my/icg/widget/trunk/lib/HTML/Widget/Factory.pm 16604 2005-11-22T03:41:18.244169Z rjbs  $
+ $Id: /my/icg/widget/trunk/lib/HTML/Widget/Factory.pm 16807 2005-11-30T04:53:14.489994Z rjbs  $
 
 =cut
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 =head1 SYNOPSIS
 
