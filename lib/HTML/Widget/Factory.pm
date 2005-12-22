@@ -10,13 +10,13 @@ HTML::Widget::Factory - churn out HTML widgets
 
 =head1 VERSION
 
-version 0.02
+version 0.03
 
- $Id: /my/icg/widget/trunk/lib/HTML/Widget/Factory.pm 16807 2005-11-30T04:53:14.489994Z rjbs  $
+ $Id: /my/icg/widget/trunk/lib/HTML/Widget/Factory.pm 17412 2005-12-22T04:24:09.422980Z rjbs  $
 
 =cut
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 =head1 SYNOPSIS
 
@@ -91,21 +91,25 @@ param that matches the passed name.
 
 =over
 
-=item L< HTML::Widget::Plugin >
+=item L<HTML::Widget::Plugin>
 
-=item L< HTML::Widget::Plugin::Input >
+=item L<HTML::Widget::Plugin::Input>
 
-=item L< HTML::Widget::Plugin::Password >
+=item L<HTML::Widget::Plugin::Link>
 
-=item L< HTML::Widget::Plugin::Select >
+=item L<HTML::Widget::Plugin::Password>
 
-=item L< HTML::Widget::Plugin::Multiselect >
+=item L<HTML::Widget::Plugin::Select>
 
-=item L< HTML::Widget::Plugin::Checkbox >
+=item L<HTML::Widget::Plugin::Multiselect>
 
-=item L< HTML::Widget::Plugin::Radio >
+=item L<HTML::Widget::Plugin::Checkbox>
 
-=item L< HTML::Element >
+=item L<HTML::Widget::Plugin::Radio>
+
+=item L<HTML::Widget::Plugin::Textarea>
+
+=item L<HTML::Element>
 
 =back
 

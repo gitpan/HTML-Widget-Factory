@@ -12,7 +12,7 @@ HTML::Widget::Plugin - base class for HTML widgets
 
 version 0.01
 
- $Id: /my/icg/widget/trunk/lib/HTML/Widget/Plugin.pm 16769 2005-11-29T17:50:44.157832Z rjbs  $
+ $Id: /my/icg/widget/trunk/lib/HTML/Widget/Plugin.pm 17410 2005-12-22T04:15:25.600632Z rjbs  $
 
 =cut
 
@@ -72,6 +72,7 @@ sub attribute_args {
   my @attributes;
 
   for ($class, Class::ISA::super_path($class)) {
+    next unless $_->can('_attribute_args');
     push @attributes, $_->_attribute_args(@_);
   }
 
@@ -96,11 +97,12 @@ sub boolean_args {
   my @attributes;
 
   for ($class, Class::ISA::super_path($class)) {
+    next unless $_->can('_boolean_args');
     push @attributes, $_->_boolean_args(@_);
   }
 
   return @attributes;
-}   
+}
 
 sub _boolean_args { () }
 
