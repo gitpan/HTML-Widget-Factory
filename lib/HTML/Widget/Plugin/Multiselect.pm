@@ -13,7 +13,7 @@ HTML::Widget::Plugin::Multiselect - widget for multiple selections from a list
 
 version 0.01
 
- $Id: /my/icg/widget/trunk/lib/HTML/Widget/Plugin/Multiselect.pm 16769 2005-11-29T17:50:44.157832Z rjbs  $
+ $Id: /my/icg/widget/trunk/lib/HTML/Widget/Plugin/Multiselect.pm 17075 2005-11-23T14:53:53.686136Z rjbs  $
 
 =cut
 

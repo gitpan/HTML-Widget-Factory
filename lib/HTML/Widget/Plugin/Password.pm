@@ -13,7 +13,7 @@ HTML::Widget::Plugin::Password - for SECRET input
 
 version 0.01
 
- $Id: /my/icg/widget/trunk/lib/HTML/Widget/Plugin/Password.pm 16605 2005-11-22T03:53:14.431444Z rjbs  $
+ $Id: /my/icg/widget/trunk/lib/HTML/Widget/Plugin/Password.pm 17056 2005-11-22T03:57:22.256989Z rjbs  $
 
 =cut
 

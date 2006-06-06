@@ -12,13 +12,13 @@ HTML::Widget::Plugin - base class for HTML widgets
 
 version 0.01
 
- $Id: /my/icg/widget/trunk/lib/HTML/Widget/Plugin.pm 17410 2005-12-22T04:15:25.600632Z rjbs  $
+ $Id: /my/icg/widget/trunk/lib/HTML/Widget/Plugin.pm 22155 2006-06-06T01:43:03.509660Z rjbs  $
 
 =cut
 
 our $VERSION = '0.01';
 
-use Carp;
+use Carp ();
 use Class::ISA;
 use List::MoreUtils qw(uniq);
 
@@ -114,23 +114,27 @@ names which should be imported from the plugin into HTML::Widget::Factory.
 =cut
 
 sub provided_widgets {
-  croak "something called abstract provided_widgets in HTML::Widget::Plugin";
+  Carp::croak
+    "something called abstract provided_widgets in HTML::Widget::Plugin";
 }
 
 sub import {
-  my ($class) = @_;
-  my ($target) = caller(0);
+  my ($class, $arg) = @_;
+  $arg ||= {};
+
+  my $target = $arg->{into} ||= caller(0);
 
   my @widgets = $class->provided_widgets;
 
   for my $widget (@widgets) {
-    my $install_to = $widget;;
+    my $install_to = $widget;
     ($widget, $install_to) = @$widget if ref $widget;
 
-    croak "$target can already provide widget '$widget'"
+    Carp::croak "$target can already provide widget '$widget'"
       if $target->can($install_to);
   
-    croak "$class claims to provide widget '$widget' but has no such method"
+    Carp::croak
+      "$class claims to provide widget '$widget' but has no such method"
       unless $class->can($widget);
 
     no strict 'refs';
@@ -143,3 +147,4 @@ sub import {
 }
 
 1;
+

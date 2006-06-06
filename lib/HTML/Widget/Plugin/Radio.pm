@@ -13,7 +13,7 @@ HTML::Widget::Plugin::Radio - a widget for sets of radio buttons
 
 version 0.01
 
- $Id: /my/icg/widget/trunk/lib/HTML/Widget/Plugin/Radio.pm 16526 2005-11-20T17:02:21.688966Z rjbs  $
+ $Id: /my/icg/widget/trunk/lib/HTML/Widget/Plugin/Radio.pm 17026 2005-11-20T17:02:59.744239Z rjbs  $
 
 =cut
 

@@ -13,7 +13,7 @@ HTML::Widget::Plugin::Select - a widget for selection from a list
 
 version 0.01
 
- $Id: /my/icg/widget/trunk/lib/HTML/Widget/Plugin/Select.pm 16769 2005-11-29T17:50:44.157832Z rjbs  $
+ $Id: /my/icg/widget/trunk/lib/HTML/Widget/Plugin/Select.pm 21415 2006-05-16T20:26:10.984632Z rjbs  $
 
 =cut
 
@@ -50,6 +50,11 @@ are valid arguments:
 
 If true, this option indicates that the select widget can't be changed by the
 user.
+
+=item ignore_invalid
+
+If this is given and true, an invalid value is ignored instead of throwing an
+exception.
 
 =item options
 
@@ -102,7 +107,7 @@ sub build {
     @options = @{ $arg->{options} };
   }
 
-  $self->validate_value($arg->{value}, \@options);
+  $self->validate_value($arg->{value}, \@options) unless $arg->{ignore_invalid};
 
   for my $entry (@options) {
     my ($value, $name) = (ref $entry) ? @$entry : ($entry) x 2;
@@ -145,11 +150,17 @@ for an explanation of its default rules.
 sub validate_value {
   my ($class, $value, $options) = @_;
 
+  my @options = map { ref $_ ? $_->[0] : $_ } @$options;
   # maybe this should be configurable?
   if ($value) {
-    my $matches = grep { $value eq $_ } map { ref $_ ? $_->[0] : $_ } @$options;
-    Carp::croak "provided value not in given options" unless $matches;
-    Carp::croak "provided value matches more than one option" if $matches > 1;
+    my $matches = grep { $value eq $_ } @options;
+
+    if (not $matches) {
+      Carp::croak "provided value '$matches' not in given options: "
+                . join(' ', map { "'$_'" } @options);
+    } elsif ($matches > 1) {
+      Carp::croak "provided value '$matches' matches more than one option";
+    }
   }
 }
 
