@@ -13,7 +13,7 @@ HTML::Widget::Plugin::Select - a widget for selection from a list
 
 version 0.01
 
- $Id: /my/icg/widget/trunk/lib/HTML/Widget/Plugin/Select.pm 21415 2006-05-16T20:26:10.984632Z rjbs  $
+ $Id: Select.pm 20489 2006-05-16 20:26:10Z rjbs $
 
 =cut
 

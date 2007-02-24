@@ -13,7 +13,7 @@ HTML::Widget::Plugin::Input - the most basic input widget
 
 version 0.01
 
- $Id: /my/icg/widget/trunk/lib/HTML/Widget/Plugin/Input.pm 17075 2005-11-23T14:53:53.686136Z rjbs  $
+ $Id: Input.pm 16149 2005-11-23 14:53:53Z rjbs $
 
 =cut
 

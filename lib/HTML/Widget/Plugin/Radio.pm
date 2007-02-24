@@ -13,7 +13,7 @@ HTML::Widget::Plugin::Radio - a widget for sets of radio buttons
 
 version 0.01
 
- $Id: /my/icg/widget/trunk/lib/HTML/Widget/Plugin/Radio.pm 17026 2005-11-20T17:02:59.744239Z rjbs  $
+ $Id: Radio.pm 27646 2007-01-26 20:47:40Z rjbs $
 
 =cut
 
@@ -51,6 +51,11 @@ are valid arguments:
 If true, this option indicates that the select widget can't be changed by the
 user.
 
+=item ignore_invalid
+
+If this is given and true, an invalid value is ignored instead of throwing an
+exception.
+
 =item options
 
 This option must be a reference to an array of allowed values, each of which
@@ -76,17 +81,29 @@ sub radio {
 
   my @widgets;
 
-  $self->validate_value($arg->{value}, $arg->{options});
+  $self->validate_value($arg->{value}, $arg->{options})
+    unless $arg->{ignore_invalid};
+
+  $arg->{attr}{name} ||= $arg->{attr}{id};
 
   for my $option (@{ $arg->{options} }) {
+    my ($value, $text, $id) = (ref $option) ? (@$option) : (($option) x 2);
+
     my $widget = HTML::Element->new('input', type => 'radio');
     $widget->attr($_ => $arg->{attr}{$_}) for keys %{ $arg->{attr} };
-    $widget->attr(value => $option);
+    # XXX document
+    $widget->attr(id => $id) if $id;
+    $widget->attr(value => $value);
+    $widget->push_content(HTML::Element->new('~literal', text => $text));
 
-    $widget->attr(on => 'on') if $arg->{value} and $arg->{value} eq $option;
+    $widget->attr(checked => 'checked')
+      if $arg->{value} and $arg->{value} eq $value;
 
     push @widgets, $widget;
   }
+
+  # XXX document
+  return @widgets if wantarray and $arg->{parts};
 
   return join '', map { $_->as_XML } @widgets;
 }
@@ -101,11 +118,17 @@ for an explanation of its default rules.
 sub validate_value {
   my ($class, $value, $options) = @_;
 
+  my @options = map { ref $_ ? $_->[0] : $_ } @$options;
   # maybe this should be configurable?
   if ($value) {
-    my $matches = grep { $value eq $_ } @$options;
-    Carp::croak "provided value not in given options" unless $matches;
-    Carp::croak "provided value matches more than one option" if $matches > 1;
+    my $matches = grep { $value eq $_ } @options;
+
+    if (not $matches) {
+      Carp::croak "provided value '$value' not in given options: "
+                . join(' ', map { "'$_'" } @options);
+    } elsif ($matches > 1) {
+      Carp::croak "provided value '$value' matches more than one option";
+    }
   }
 }
 

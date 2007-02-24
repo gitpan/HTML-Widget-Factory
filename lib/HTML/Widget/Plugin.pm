@@ -12,7 +12,7 @@ HTML::Widget::Plugin - base class for HTML widgets
 
 version 0.01
 
- $Id: /my/icg/widget/trunk/lib/HTML/Widget/Plugin.pm 22155 2006-06-06T01:43:03.509660Z rjbs  $
+ $Id: Plugin.pm 21152 2006-06-06 16:05:36Z rjbs $
 
 =cut
 

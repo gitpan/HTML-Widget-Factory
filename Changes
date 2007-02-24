@@ -1,5 +1,12 @@
 Revision history for HTML-Widget-Factory
 
+0.050   2007-02-24
+        allow return of individual radio widget parts
+        allow per-radio-option ids
+        allow ignore_invalid for radio buttons
+        fix errors in error messages from radio buttons
+        skip ->require on (__)?GENERATED(__)? plugin classes
+
 0.04    2006-06-06
         implement per-factory classes
 

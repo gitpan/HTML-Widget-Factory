@@ -13,7 +13,7 @@ HTML::Widget::Plugin::Checkbox - it's either [ ] or [x]
 
 version 0.01
 
- $Id: /my/icg/widget/trunk/lib/HTML/Widget/Plugin/Checkbox.pm 17079 2005-11-23T15:43:24.763282Z rjbs  $
+ $Id: Checkbox.pm 16153 2005-11-23 15:43:24Z rjbs $
 
 =cut
 

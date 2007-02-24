@@ -10,13 +10,13 @@ HTML::Widget::Factory - churn out HTML widgets
 
 =head1 VERSION
 
-version 0.04
+version 0.050
 
- $Id: /my/icg/widget/trunk/lib/HTML/Widget/Factory.pm 22162 2006-06-06T15:04:44.533868Z rjbs  $
+ $Id: Factory.pm 28162 2007-02-24 15:29:38Z rjbs $
 
 =cut
 
-our $VERSION = '0.04';
+our $VERSION = '0.050';
 
 =head1 SYNOPSIS
 
@@ -80,7 +80,10 @@ sub __mix_in {
   my ($class, @plugins) = @_;
 
   for my $plugin (@plugins) {
-    $plugin->require or die $@;
+    unless ($plugin =~ /::(__)?GENERATED\1::/ and
+              Package::Generator->package_exists($plugin)) {
+      $plugin->require or die $@;
+    }
     $plugin->import({ into => $class });
   }
 }
@@ -170,9 +173,11 @@ param that matches the passed name.
 
 Ricardo SIGNES <C<rjbs @ cpan.org>>
 
+Development was sponsored by Listbox and Pobox between 2005 and 2007.
+
 =head1 COPYRIGHT
 
-Copyright (C) 2005-2006, Ricardo SIGNES.  This is free software, released under
+Copyright (C) 2005-2007, Ricardo SIGNES.  This is free software, released under
 the same terms as perl itself.
 
 =cut
