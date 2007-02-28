@@ -11,13 +11,13 @@ HTML::Widget::Plugin::Input - the most basic input widget
 
 =head1 VERSION
 
-version 0.01
+version 0.055
 
- $Id: Input.pm 16149 2005-11-23 14:53:53Z rjbs $
+ $Id: Input.pm 28249 2007-02-28 20:48:46Z rjbs $
 
 =cut
 
-our $VERSION = '0.01';
+our $VERSION = '0.055';
 
 =head1 DESCRIPTION
 

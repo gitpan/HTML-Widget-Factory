@@ -10,13 +10,13 @@ HTML::Widget::Factory - churn out HTML widgets
 
 =head1 VERSION
 
-version 0.050
+version 0.055
 
- $Id: Factory.pm 28162 2007-02-24 15:29:38Z rjbs $
+ $Id: Factory.pm 28249 2007-02-28 20:48:46Z rjbs $
 
 =cut
 
-our $VERSION = '0.050';
+our $VERSION = '0.055';
 
 =head1 SYNOPSIS
 
@@ -151,7 +151,11 @@ param that matches the passed name.
 
 =item L<HTML::Widget::Plugin::Input>
 
+=item L<HTML::Widget::Plugin::Submit>
+
 =item L<HTML::Widget::Plugin::Link>
+
+=item L<HTML::Widget::Plugin::Image>
 
 =item L<HTML::Widget::Plugin::Password>
 
@@ -162,6 +166,8 @@ param that matches the passed name.
 =item L<HTML::Widget::Plugin::Checkbox>
 
 =item L<HTML::Widget::Plugin::Radio>
+
+=item L<HTML::Widget::Plugin::Button>
 
 =item L<HTML::Widget::Plugin::Textarea>
 

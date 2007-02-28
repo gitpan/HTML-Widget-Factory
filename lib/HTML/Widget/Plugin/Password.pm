@@ -11,13 +11,13 @@ HTML::Widget::Plugin::Password - for SECRET input
 
 =head1 VERSION
 
-version 0.01
+version 0.055
 
- $Id: Password.pm 16130 2005-11-22 03:57:22Z rjbs $
+ $Id: Password.pm 28249 2007-02-28 20:48:46Z rjbs $
 
 =cut
 
-our $VERSION = '0.01';
+our $VERSION = '0.055';
 
 =head1 DESCRIPTION
 

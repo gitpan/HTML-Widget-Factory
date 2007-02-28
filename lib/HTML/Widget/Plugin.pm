@@ -10,13 +10,13 @@ HTML::Widget::Plugin - base class for HTML widgets
 
 =head1 VERSION
 
-version 0.01
+version 0.011
 
- $Id: Plugin.pm 21152 2006-06-06 16:05:36Z rjbs $
+ $Id: Plugin.pm 28249 2007-02-28 20:48:46Z rjbs $
 
 =cut
 
-our $VERSION = '0.01';
+our $VERSION = '0.011';
 
 use Carp ();
 use Class::ISA;
@@ -42,7 +42,7 @@ It moves attributes listed in the results of the C<attribute_args> method.
 
 sub rewrite_arg {
   my ($class, $given_arg) = @_;
-  my $arg = { %$given_arg };
+  my $arg = { $given_arg ? %$given_arg : () };
 
   my %bool = map { $_ => 1 } $class->boolean_args;
 

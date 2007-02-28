@@ -11,13 +11,13 @@ HTML::Widget::Plugin::Checkbox - it's either [ ] or [x]
 
 =head1 VERSION
 
-version 0.01
+version 0.055
 
- $Id: Checkbox.pm 16153 2005-11-23 15:43:24Z rjbs $
+ $Id: Checkbox.pm 28249 2007-02-28 20:48:46Z rjbs $
 
 =cut
 
-our $VERSION = '0.01';
+our $VERSION = '0.055';
 
 =head1 DESCRIPTION
 

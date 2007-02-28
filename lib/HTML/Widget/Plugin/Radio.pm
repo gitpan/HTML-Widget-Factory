@@ -11,13 +11,13 @@ HTML::Widget::Plugin::Radio - a widget for sets of radio buttons
 
 =head1 VERSION
 
-version 0.01
+version 0.055
 
- $Id: Radio.pm 27646 2007-01-26 20:47:40Z rjbs $
+ $Id: Radio.pm 28249 2007-02-28 20:48:46Z rjbs $
 
 =cut
 
-our $VERSION = '0.01';
+our $VERSION = '0.055';
 
 =head1 DESCRIPTION
 
