@@ -13,7 +13,7 @@ HTML::Widget::Plugin::Select - a widget for selection from a list
 
 version 0.055
 
- $Id: Select.pm 28249 2007-02-28 20:48:46Z rjbs $
+ $Id: Select.pm 28256 2007-03-01 02:30:12Z rjbs $
 
 =cut
 
@@ -22,10 +22,6 @@ our $VERSION = '0.055';
 =head1 DESCRIPTION
 
 This plugin provides a select-from-list widget.
-
-=cut
-
-use HTML::Element;
 
 =head1 METHODS
 
@@ -76,6 +72,8 @@ has this value.
 
 =cut
 
+use HTML::Element;
+
 sub _attribute_args { qw(disabled) }
 sub _boolean_args   { qw(disabled) }
 
@@ -96,7 +94,7 @@ in the exported widget-constructing call.  It's here for subclasses to exploit.
 
 sub build {
   my ($self, $factory, $arg) = @_;
-  $arg->{attr}{name} ||= $arg->{attr}{id};
+  $arg->{attr}{name} = $arg->{attr}{id} unless $arg->{attr}{name};
 
   my $widget = HTML::Element->new('select');
 
@@ -105,6 +103,8 @@ sub build {
     @options = map { [ $_, $arg->{options}{$_} ] } keys %{ $arg->{options} };
   } else {
     @options = @{ $arg->{options} };
+    Carp::croak "undefined value passed to select widget"
+      if grep { not(defined $_) or ref $_ and not defined $_->[0] } @options;
   }
 
   $self->validate_value($arg->{value}, \@options) unless $arg->{ignore_invalid};
@@ -135,7 +135,7 @@ sub make_option {
   my $option = HTML::Element->new('option', value => $value);
      $option->push_content($name);
      $option->attr(selected => 'selected')
-       if $arg->{value} and $value and $arg->{value} eq $value;
+       if defined $arg->{value} and $arg->{value} eq $value;
 
   return $option;
 }
@@ -170,8 +170,8 @@ Ricardo SIGNES <C<rjbs @ cpan.org>>
 
 =head1 COPYRIGHT
 
-Copyright (C) 2005, Ricardo SIGNES.  This is free software, released under the
-same terms as perl itself.
+Copyright (C) 2005-2007, Ricardo SIGNES.  This is free software, released under
+the same terms as perl itself.
 
 =cut
 

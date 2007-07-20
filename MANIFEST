@@ -25,10 +25,12 @@ t/link.t
 t/multiselect.t
 t/password.t
 t/plugin.t
+t/plugins.t
 t/pod-coverage.t
 t/pod.t
 t/radio.t
 t/select.t
 t/submit.t
 t/textarea.t
+t/lib/Test/WidgetFactory.pm
 META.yml                                 Module meta-data (added by MakeMaker)

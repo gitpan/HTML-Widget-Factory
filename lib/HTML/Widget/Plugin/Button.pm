@@ -13,7 +13,7 @@ HTML::Widget::Plugin::Button - a button for clicking
 
 version 0.056
 
- $Id: Button.pm 28252 2007-02-28 21:18:07Z rjbs $
+ $Id: Button.pm 28258 2007-03-01 11:46:07Z rjbs $
 
 =cut
 
@@ -89,12 +89,14 @@ subclasses to exploit.
 my %TYPES = map { $_ => 1 } qw(button reset submit);
 sub __is_valid_type {
   my ($self, $type) = @_;
+
+  return exists $TYPES{ $type };
 }
 
 sub build {
   my ($self, $factory, $arg) = @_;
 
-  $arg->{attr}{name} ||= $arg->{attr}{id};
+  $arg->{attr}{name} = $arg->{attr}{id} if not defined $arg->{attr}{name};
   $arg->{attr}{type} ||= 'button';
 
   Carp::croak "invalid button type: $arg->{attr}{type}"
@@ -112,7 +114,9 @@ sub build {
              ? $arg->{html}
              : HTML::Element->new('~literal' => text => $arg->{html});
   } else {
-    $content = $arg->{text} || ucfirst lc $arg->{attr}{type};;
+    $content = defined $arg->{text}
+             ? $arg->{text}
+             : ucfirst lc $arg->{attr}{type};
   }
 
   $widget->push_content($content);

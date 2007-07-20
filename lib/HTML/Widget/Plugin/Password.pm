@@ -13,7 +13,7 @@ HTML::Widget::Plugin::Password - for SECRET input
 
 version 0.055
 
- $Id: Password.pm 28249 2007-02-28 20:48:46Z rjbs $
+ $Id: Password.pm 28259 2007-03-01 13:05:16Z rjbs $
 
 =cut
 
@@ -69,7 +69,8 @@ sub rewrite_arg {
 
   $arg->{attr}{type} = "password";
 
-  $arg->{attr}{value} &&= "        ";
+  $arg->{attr}{value} = q{ } x 8
+    if defined $arg->{attr}{value} and length $arg->{attr}{value};
 
   return $arg;
 }
@@ -80,8 +81,8 @@ Ricardo SIGNES <C<rjbs @ cpan.org>>
 
 =head1 COPYRIGHT
 
-Copyright (C) 2005, Ricardo SIGNES.  This is free software, released under the
-same terms as perl itself.
+Copyright (C) 2005-2007, Ricardo SIGNES.  This is free software, released under
+the same terms as perl itself.
 
 =cut
 

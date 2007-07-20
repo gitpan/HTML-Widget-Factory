@@ -1,22 +1,19 @@
-#!perl 
-use Test::More tests => 6;
-use HTML::TreeBuilder;
+#!perl -T
+use strict;
+use warnings;
+
+use Test::More tests => 8;
 
 BEGIN { use_ok("HTML::Widget::Factory"); }
 
-my $widget = HTML::Widget::Factory->new;
+use lib 't/lib';
+use Test::WidgetFactory;
 
-isa_ok($widget, 'HTML::Widget::Factory');
-
-can_ok($widget, 'textarea');
-
-{ # make a password-entry widget
-  my $html = $widget->textarea({
+{ # make a textarea widget
+  my ($html, $tree) = widget(textarea => {
     name  => 'big_ol',
     value => 'This is some big old block of text.  Pretend!',
   });
-
-  my $tree = HTML::TreeBuilder->new_from_content($html);
   
   my ($textarea) = $tree->look_down(_tag => 'textarea');
 
@@ -26,6 +23,35 @@ can_ok($widget, 'textarea');
     $textarea->attr('name'),
     'big_ol',
     "got correct textarea name",
+  );
+
+  is(
+    $textarea->as_text,
+    'This is some big old block of text.  Pretend!',
+    "the textarea has the right content"
+  );
+}
+
+{ # make a textarea widget
+  my ($html, $tree) = widget(textarea => {
+    id    => 'textarea123',
+    value => 'This is some big old block of text.  Pretend!',
+  });
+  
+  my ($textarea) = $tree->look_down(_tag => 'textarea');
+
+  isa_ok($textarea, 'HTML::Element');
+
+  is(
+    $textarea->attr('id'),
+    'textarea123',
+    "got correct textarea id",
+  );
+
+  is(
+    $textarea->attr('name'),
+    'textarea123',
+    "got correct textarea name, from id",
   );
 
   is(

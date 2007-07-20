@@ -13,7 +13,7 @@ HTML::Widget::Plugin::Multiselect - widget for multiple selections from a list
 
 version 0.055
 
- $Id: Multiselect.pm 28249 2007-02-28 20:48:46Z rjbs $
+ $Id: Multiselect.pm 28259 2007-03-01 13:05:16Z rjbs $
 
 =cut
 
@@ -60,7 +60,7 @@ sub _attribute_args { qw(size) }
 sub multiselect {
   my ($self, $factory, $arg) = @_;
 
-  $arg->{attr}{name} ||= $arg->{attr}{id};
+  $arg->{attr}{name} = $arg->{attr}{id} if not defined $arg->{attr}{name};
 
   if ($arg->{values}) {
     $arg->{value} = delete $arg->{values};
@@ -98,6 +98,7 @@ sub validate_value {
   my ($class, $values, $options) = @_;
 
   $values = [ $values ] unless ref $values;
+  return unless grep { defined } @$values;
 
   for my $value (@$values) {
     my $matches = grep { $value eq $_ } map { ref $_ ? $_->[0] : $_ } @$options;
@@ -105,17 +106,14 @@ sub validate_value {
   }
 }
 
-
-
-
 =head1 AUTHOR
 
 Ricardo SIGNES <C<rjbs @ cpan.org>>
 
 =head1 COPYRIGHT
 
-Copyright (C) 2005, Ricardo SIGNES.  This is free software, released under the
-same terms as perl itself.
+Copyright (C) 2005-2007, Ricardo SIGNES.  This is free software, released under
+the same terms as perl itself.
 
 =cut
 

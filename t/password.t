@@ -1,22 +1,46 @@
-#!perl 
-use Test::More tests => 7;
-use HTML::TreeBuilder;
+#!perl -T
+use strict;
+use warnings;
+
+use Test::More tests => 10;
 
 BEGIN { use_ok("HTML::Widget::Factory"); }
 
-my $widget = HTML::Widget::Factory->new;
+use lib 't/lib';
+use Test::WidgetFactory;
 
-isa_ok($widget, 'HTML::Widget::Factory');
+{ # make an empty password-entry widget, no password
+  my ($html, $tree) = widget(password => {
+    name  => 'pw',
+  });
+  
+  my ($input) = $tree->look_down(_tag => 'input');
 
-can_ok($widget, 'password');
+  isa_ok($input, 'HTML::Element');
 
-{ # make a password-entry widget
-  my $html = $widget->password({
+  is(
+    $input->attr('name'),
+    'pw',
+    "got correct input name",
+  );
+
+  is(
+    $input->attr('type'),
+    'password',
+    "it's a password input!",
+  );
+
+  ok(
+    ! $input->attr('value'),
+    "the content has been replaced"
+  );
+}
+
+{ # make a password-entry widget, password
+  my ($html, $tree) = widget(password => {
     name  => 'pw',
     value => 'minty',
   });
-
-  my $tree = HTML::TreeBuilder->new_from_content($html);
   
   my ($input) = $tree->look_down(_tag => 'input');
 
@@ -38,5 +62,19 @@ can_ok($widget, 'password');
     $input->attr('value'),
     q{ }x8,
     "the content has been replaced"
+  );
+}
+
+{ # make a password-entry widget, empty password
+  my ($html, $tree) = widget(password => {
+    name  => 'pw',
+    value => '',
+  });
+  
+  my ($input) = $tree->look_down(_tag => 'input');
+
+  ok(
+    ! $input->attr('value'),
+    "no value for input if given input was empty string",
   );
 }

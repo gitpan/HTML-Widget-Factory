@@ -13,7 +13,7 @@ HTML::Widget::Plugin::Radio - a widget for sets of radio buttons
 
 version 0.055
 
- $Id: Radio.pm 28249 2007-02-28 20:48:46Z rjbs $
+ $Id: Radio.pm 28259 2007-03-01 13:05:16Z rjbs $
 
 =cut
 
@@ -84,7 +84,7 @@ sub radio {
   $self->validate_value($arg->{value}, $arg->{options})
     unless $arg->{ignore_invalid};
 
-  $arg->{attr}{name} ||= $arg->{attr}{id};
+  $arg->{attr}{name} = $arg->{attr}{id} if not defined $arg->{attr}{name};
 
   for my $option (@{ $arg->{options} }) {
     my ($value, $text, $id) = (ref $option) ? (@$option) : (($option) x 2);
@@ -119,8 +119,8 @@ sub validate_value {
   my ($class, $value, $options) = @_;
 
   my @options = map { ref $_ ? $_->[0] : $_ } @$options;
-  # maybe this should be configurable?
-  if ($value) {
+
+  if (defined $value) {
     my $matches = grep { $value eq $_ } @options;
 
     if (not $matches) {
@@ -138,8 +138,8 @@ Ricardo SIGNES <C<rjbs @ cpan.org>>
 
 =head1 COPYRIGHT
 
-Copyright (C) 2005, Ricardo SIGNES.  This is free software, released under the
-same terms as perl itself.
+Copyright (C) 2005-2007, Ricardo SIGNES.  This is free software, released under
+the same terms as perl itself.
 
 =cut
 

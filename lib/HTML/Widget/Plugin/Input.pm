@@ -13,7 +13,7 @@ HTML::Widget::Plugin::Input - the most basic input widget
 
 version 0.055
 
- $Id: Input.pm 28249 2007-02-28 20:48:46Z rjbs $
+ $Id: Input.pm 31405 2007-07-20 00:09:10Z rjbs $
 
 =cut
 
@@ -31,7 +31,7 @@ use HTML::Element;
 
 =head2 C< provided_widgets >
 
-This plugin provides the following widgets: input
+This plugin provides the following widgets: input, hidden
 
 =cut
 
@@ -98,7 +98,7 @@ subclasses to exploit.
 sub build {
   my ($self, $factory, $arg) = @_;
 
-  $arg->{attr}{name} ||= $arg->{attr}{id};
+  $arg->{attr}{name} = $arg->{attr}{id} unless defined $arg->{attr}{name};
 
   my $widget = HTML::Element->new('input');
 
@@ -112,8 +112,8 @@ Ricardo SIGNES <C<rjbs @ cpan.org>>
 
 =head1 COPYRIGHT
 
-Copyright (C) 2005, Ricardo SIGNES.  This is free software, released under the
-same terms as perl itself.
+Copyright (C) 2005-2007, Ricardo SIGNES.  This is free software, released under
+the same terms as perl itself.
 
 =cut
 

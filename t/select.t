@@ -1,18 +1,18 @@
-#!perl 
-use Test::More tests => 17;
-use HTML::TreeBuilder;
+#!perl -T
+use strict;
+use warnings;
+
+use Test::More tests => 23;
 
 BEGIN { use_ok("HTML::Widget::Factory"); }
 
-my $widget = HTML::Widget::Factory->new;
-
-isa_ok($widget, 'HTML::Widget::Factory');
-
-can_ok($widget, 'select');
+use lib 't/lib';
+use Test::WidgetFactory;
 
 { # make a select field with AoA options
-  my $html = $widget->select({
+  my ($html, $tree) = widget(select => {
     options => [
+      [ ''    => 'Flavorless',     ],
       [ minty => 'Peppermint',     ],
       [ perky => 'Fresh and Warm', ],
       [ super => 'Red and Blue',   ],
@@ -20,8 +20,6 @@ can_ok($widget, 'select');
     name  => 'flavor',
     value => 'minty',
   });
-
-  my $tree = HTML::TreeBuilder->new_from_content($html);
   
   my ($select) = $tree->look_down(_tag => 'select');
 
@@ -32,10 +30,20 @@ can_ok($widget, 'select');
     'flavor',
     "got correct input name",
   );
+
+  my @options = $select->look_down(_tag => 'option');
+
+  is(@options, 4, "there are four options listed");
+
+  my @selected = $select->look_down(selected => 'selected');
+
+  is(@selected, 1, "only one is selected");
+
+  is($selected[0]->attr('value'), 'minty', "the correct one is selected");
 }
 
 { # make a select field with hash options
-  my $html = $widget->select({
+  my ($html, $tree) = widget(select => {
     options => {
       minty => 'Peppermint',
       perky => 'Fresh and Warm',
@@ -44,8 +52,6 @@ can_ok($widget, 'select');
     name  => 'flavor',
     value => 'minty',
   });
-
-  my $tree = HTML::TreeBuilder->new_from_content($html);
   
   my ($select) = $tree->look_down(_tag => 'select');
 
@@ -73,13 +79,11 @@ can_ok($widget, 'select');
 }
 
 { # make a select field with hash options
-  my $html = $widget->select({
+  my ($html, $tree) = widget(select => {
     options  => [ qw(red orange yellow green blue indigo violet) ],
     name     => 'color',
     disabled => 'yup',
   });
-
-  my $tree = HTML::TreeBuilder->new_from_content($html);
   
   my ($select) = $tree->look_down(_tag => 'select');
 
@@ -104,13 +108,77 @@ can_ok($widget, 'select');
 
 {
   # test exception on invalid value
-  eval { $widget->select({ options => [[1,1]], value => 2 }) };
-  like($@, qr/provided value/, "bad values throw exception");
+  eval { widget(select => { options => [[1,1]], value => 2 }) };
+  like($@, qr/not in given/, "bad values throw exception");
 
   my $html = eval {
-    $widget->select({ options => [[1,1]], value => 2, ignore_invalid => 1 });
+    my ($x) = widget(
+      select => { options => [[1,1]], value => 2, ignore_invalid => 1 }
+    );
+    $x;
   };
-  ok(! $@, "...unless you pass ignore_invalid");
+
+  is($@, '', "...unless you pass ignore_invalid");
 
   like($html, qr/select/, "and we got a html element back!");
+}
+{
+  # test exception on ambiguous value
+  eval {
+    widget(select => {
+      value   => 'foo',
+      options => [
+        [ foo => "Foo 1" ],
+        [ foo => "Foo 2" ],
+        [ bar => "Bar 1" ],
+      ],
+    });
+  };
+  like($@, qr/more than one/, "ambiguous values throw exception");
+
+  my ($html) = eval {
+    widget(select => {
+      value   => 'foo',
+      options => [
+        [ foo => "Foo 1" ],
+        [ foo => "Foo 2" ],
+        [ bar => "Bar 1" ],
+      ],
+      ignore_invalid => 1,
+    });
+  };
+
+  is($@, '', "...unless you pass ignore_invalid");
+
+  like($html, qr/select/, "and we got a html element back!");
+}
+
+{
+  # test exception on undef value
+  eval {
+    widget(select => {
+      options => [
+        [ undef,   'Peppermint',     ],
+        [ perky => 'Fresh and Warm', ],
+        [ super => 'Red and Blue',   ],
+      ],
+      name  => 'flavor',
+      value => 'minty',
+    });
+  };
+
+  like($@, qr/undefined value/, "you can't pass undef as a value (AOA)");
+}
+
+{
+  # test exception on undef value
+  eval {
+    widget(select => {
+      options => [ undef, 1, 2, 3 ],
+      name    => 'flavor',
+      value   => 'minty',
+    });
+  };
+
+  like($@, qr/undefined value/, "you can't pass undef as a value (aref)");
 }

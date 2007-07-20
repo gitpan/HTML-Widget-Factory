@@ -65,7 +65,7 @@ sub _attribute_args { qw(href class id) }
 sub link {
   my ($self, $factory, $arg) = @_;
 
-  $arg->{attr}{name} ||= $arg->{attr}{id};
+  $arg->{attr}{name} = $arg->{attr}{id} if not defined $arg->{attr}{name};
 
   Carp::croak "can't create a link without an href"
     unless $arg->{attr}{href};
@@ -82,7 +82,7 @@ sub link {
              ? $arg->{html}
              : HTML::Element->new('~literal' => text => $arg->{html});
   } else {
-    $content = $arg->{text} || $arg->{attr}{href};
+    $content = defined $arg->{text} ? $arg->{text} : $arg->{attr}{href};
   }
 
   $widget->push_content($content);
@@ -96,8 +96,8 @@ Ricardo SIGNES <C<rjbs @ cpan.org>>
 
 =head1 COPYRIGHT
 
-Copyright (C) 2005, Ricardo SIGNES.  This is free software, released under the
-same terms as perl itself.
+Copyright (C) 2005-2007, Ricardo SIGNES.  This is free software, released under
+the same terms as perl itself.
 
 =cut
 

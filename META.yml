@@ -1,9 +1,9 @@
 --- #YAML:1.0
 name:                HTML-Widget-Factory
-version:             0.056
+version:             0.058
 abstract:            ~
 license:             perl
-generated_by:        ExtUtils::MakeMaker version 6.31
+generated_by:        ExtUtils::MakeMaker version 6.32
 distribution_type:   module
 requires:     
     HTML::Element:                 0

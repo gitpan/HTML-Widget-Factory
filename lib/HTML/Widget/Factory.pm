@@ -10,13 +10,13 @@ HTML::Widget::Factory - churn out HTML widgets
 
 =head1 VERSION
 
-version 0.056
+version 0.058
 
- $Id: Factory.pm 28252 2007-02-28 21:18:07Z rjbs $
+ $Id: Factory.pm 31404 2007-07-20 00:03:36Z rjbs $
 
 =cut
 
-our $VERSION = '0.056';
+our $VERSION = '0.058';
 
 =head1 SYNOPSIS
 
@@ -41,7 +41,8 @@ form controls.
 
 use Module::Pluggable
   search_path => [ qw(HTML::Widget::Plugin) ],
-  sub_name    => '_default_plugins';
+  sub_name    => '_default_plugins',
+  except      => qr/^HTML::Widget::Plugin::Debug/;
 
 use Package::Generator;
 use Package::Reaper;
@@ -105,10 +106,10 @@ sub new {
   my $obj_class = $_default_class;
   my $reaper;
 
+  my @plugins = $arg->{plugins} ? @{ $arg->{plugins} } : @_default_plugins;
+
   if ($arg->{plugins} or $arg->{extra_plugins}) {
     $obj_class = $class->__new_class;
-
-    my @plugins = $arg->{plugins} ? @{ $arg->{plugins} } : @_default_plugins;
 
     push @plugins, @{ $arg->{extra_plugins} } if $arg->{extra_plugins};
 
@@ -117,8 +118,19 @@ sub new {
     $reaper = Package::Reaper->new($obj_class);
   }
 
-  bless { ($reaper ? (reaper => $reaper) : ()) } => $obj_class;
+  bless {
+    ($reaper ? (reaper => $reaper) : ()),
+    plugins => \@plugins,
+  } => $obj_class;
 }
+
+=head2 plugins
+
+This returns a list of the plugins loaded by the factory.
+
+=cut
+
+sub plugins { @{ $_[0]->{plugins} } }
 
 =head1 TODO
 

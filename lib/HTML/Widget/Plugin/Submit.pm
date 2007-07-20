@@ -13,7 +13,7 @@ HTML::Widget::Plugin::Submit - for submit type inputs
 
 version 0.055
 
- $Id: Submit.pm 28249 2007-02-28 20:48:46Z rjbs $
+ $Id: Submit.pm 28259 2007-03-01 13:05:16Z rjbs $
 
 =cut
 
@@ -23,10 +23,6 @@ our $VERSION = '0.055';
 
 This plugin provide a simple submit plugin, which returns an input element of
 type submit.
-
-=cut
-
-use HTML::Element;
 
 =head1 METHODS
 
@@ -56,10 +52,12 @@ as the text for the label on its face.
 
 =cut
 
+use HTML::Element;
+
 sub submit {
   my ($self, $factory, $arg) = @_;
 
-  $arg->{attr}{type} ||= 'submit';
+  $arg->{attr}{type} = 'submit';
 
   # I suppose I could carp, here, if the type is altered, but... it's your
   # foot, shoot it if you want. -- rjbs, 2007-02-28]

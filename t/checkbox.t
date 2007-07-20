@@ -1,22 +1,20 @@
-#!perl 
-use Test::More tests => 13;
-use HTML::TreeBuilder;
+#!perl -T
+use strict;
+use warnings;
+
+use Test::More tests => 11;
 
 BEGIN { use_ok("HTML::Widget::Factory"); }
 
-my $widget = HTML::Widget::Factory->new;
-
-isa_ok($widget, 'HTML::Widget::Factory');
-
-can_ok($widget, 'checkbox');
+use lib 't/lib';
+use Test::WidgetFactory;
 
 { # make a super-simple checkbox widget
-  my $html = $widget->checkbox({
+  my ($html, $tree) = widget(checkbox => {
     name    => 'flavor',
-    checked => 'minty',
+    value   => 'minty',
+    checked => 1,
   });
-
-  my $tree = HTML::TreeBuilder->new_from_content($html);
   
   my ($checkbox) = $tree->look_down(_tag => 'input');
 
@@ -29,6 +27,12 @@ can_ok($widget, 'checkbox');
   );
 
   is(
+    $checkbox->attr('value'),
+    'minty',
+    "it's got the right value!",
+  );
+
+  is(
     $checkbox->attr('type'),
     'checkbox',
     "it's a checkbox!",
@@ -37,22 +41,14 @@ can_ok($widget, 'checkbox');
   ok(
     $checkbox->attr('checked'),
     "it's checked"
-  );
-
-  is(
-    $checkbox->attr('value'),
-    undef,
-    "...but it has no value"
   );
 }
 
-{ # use value instead of checked
-  my $html = $widget->checkbox({
-    name  => 'flavor',
+{ # use value instead of checked, id instead of name
+  my ($html, $tree) = widget(checkbox => {
+    id    => 'flavor',
     value => 'minty',
   });
-
-  my $tree = HTML::TreeBuilder->new_from_content($html);
   
   my ($checkbox) = $tree->look_down(_tag => 'input');
 
@@ -65,19 +61,19 @@ can_ok($widget, 'checkbox');
   );
 
   is(
+    $checkbox->attr('value'),
+    'minty',
+    "got the right value",
+  );
+
+  is(
     $checkbox->attr('type'),
     'checkbox',
     "it's a checkbox!",
   );
 
   ok(
-    $checkbox->attr('checked'),
-    "it's checked"
-  );
-
-  is(
-    $checkbox->attr('value'),
-    undef,
-    "...but it has no value"
+    ! $checkbox->attr('checked'),
+    "it's not checked"
   );
 }
