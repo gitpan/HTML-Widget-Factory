@@ -13,8 +13,6 @@ HTML::Widget::Plugin::Checkbox - it's either [ ] or [x]
 
 version 0.057
 
- $Id: Checkbox.pm 29262 2007-05-01 17:18:29Z rjbs $
-
 =cut
 
 our $VERSION = '0.057';

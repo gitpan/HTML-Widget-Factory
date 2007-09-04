@@ -13,8 +13,6 @@ HTML::Widget::Plugin::Radio - a widget for sets of radio buttons
 
 version 0.055
 
- $Id: Radio.pm 28259 2007-03-01 13:05:16Z rjbs $
-
 =cut
 
 our $VERSION = '0.055';

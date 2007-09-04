@@ -13,8 +13,6 @@ HTML::Widget::Plugin::Select - a widget for selection from a list
 
 version 0.055
 
- $Id: Select.pm 28256 2007-03-01 02:30:12Z rjbs $
-
 =cut
 
 our $VERSION = '0.055';

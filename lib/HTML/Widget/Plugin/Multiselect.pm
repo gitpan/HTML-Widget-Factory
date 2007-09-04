@@ -13,8 +13,6 @@ HTML::Widget::Plugin::Multiselect - widget for multiple selections from a list
 
 version 0.055
 
- $Id: Multiselect.pm 28259 2007-03-01 13:05:16Z rjbs $
-
 =cut
 
 our $VERSION = '0.055';

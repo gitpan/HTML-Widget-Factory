@@ -13,8 +13,6 @@ HTML::Widget::Plugin::Button - a button for clicking
 
 version 0.056
 
- $Id: Button.pm 28258 2007-03-01 11:46:07Z rjbs $
-
 =cut
 
 our $VERSION = '0.056';

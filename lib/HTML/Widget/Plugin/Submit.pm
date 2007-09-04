@@ -13,8 +13,6 @@ HTML::Widget::Plugin::Submit - for submit type inputs
 
 version 0.055
 
- $Id: Submit.pm 28259 2007-03-01 13:05:16Z rjbs $
-
 =cut
 
 our $VERSION = '0.055';

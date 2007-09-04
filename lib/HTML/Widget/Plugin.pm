@@ -12,8 +12,6 @@ HTML::Widget::Plugin - base class for HTML widgets
 
 version 0.011
 
- $Id: Plugin.pm 28255 2007-03-01 01:59:55Z rjbs $
-
 =cut
 
 our $VERSION = '0.011';
