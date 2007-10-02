@@ -10,15 +10,16 @@ HTML::Widget::Plugin - base class for HTML widgets
 
 =head1 VERSION
 
-version 0.011
+version 0.061
 
 =cut
 
-our $VERSION = '0.011';
+our $VERSION = '0.061';
 
 use Carp ();
 use Class::ISA;
 use List::MoreUtils qw(uniq);
+use Sub::Install;
 
 =head1 DESCRIPTION
 
@@ -135,13 +136,16 @@ sub import {
       "$class claims to provide widget '$widget' but has no such method"
       unless $class->can($widget);
 
-    no strict 'refs';
-    *{$target . '::' . $install_to} = sub {
-      my ($self, $given_arg) = @_;
-      my $arg = $class->rewrite_arg($given_arg);
+    Sub::Install::install_sub({
+      into => $target,
+      as   => $install_to,
+      code => sub {
+        my ($self, $given_arg) = @_;
+        my $arg = $class->rewrite_arg($given_arg);
 
-      $class->$widget($self, $arg);
-    }
+        $class->$widget($self, $arg);
+      }
+    });
   }
 }
 

@@ -3,7 +3,9 @@ use strict;
 use warnings;
 
 package HTML::Widget::Plugin::Radio;
-use base qw(HTML::Widget::Plugin);
+
+use HTML::Widget::Plugin ();
+BEGIN { our @ISA = 'HTML::Widget::Plugin' };
 
 =head1 NAME
 
@@ -11,11 +13,11 @@ HTML::Widget::Plugin::Radio - a widget for sets of radio buttons
 
 =head1 VERSION
 
-version 0.055
+version 0.061
 
 =cut
 
-our $VERSION = '0.055';
+our $VERSION = '0.061';
 
 =head1 DESCRIPTION
 
@@ -82,7 +84,10 @@ sub radio {
   $self->validate_value($arg->{value}, $arg->{options})
     unless $arg->{ignore_invalid};
 
-  $arg->{attr}{name} = $arg->{attr}{id} if not defined $arg->{attr}{name};
+  if (my $id_attr = delete $arg->{attr}{id}) {
+    Carp::cluck "id may not be used as a widget-level attribute for radio";
+    $arg->{attr}{name} = $id_attr if not defined $arg->{attr}{name};
+  }
 
   for my $option (@{ $arg->{options} }) {
     my ($value, $text, $id) = (ref $option) ? (@$option) : (($option) x 2);
@@ -103,7 +108,7 @@ sub radio {
   # XXX document
   return @widgets if wantarray and $arg->{parts};
 
-  return join '', map { $_->as_XML } @widgets;
+  return join q{}, map { $_->as_XML } @widgets;
 }
 
 =head2 C< validate_value >
@@ -123,7 +128,7 @@ sub validate_value {
 
     if (not $matches) {
       Carp::croak "provided value '$value' not in given options: "
-                . join(' ', map { "'$_'" } @options);
+                . join(q{ }, map { "'$_'" } @options);
     } elsif ($matches > 1) {
       Carp::croak "provided value '$value' matches more than one option";
     }

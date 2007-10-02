@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:                HTML-Widget-Factory
-version:             0.059
+version:             0.061
 abstract:            ~
 license:             perl
 generated_by:        ExtUtils::MakeMaker version 6.32
@@ -11,6 +11,7 @@ requires:
     Module::Pluggable:             2.9
     Package::Generator:            0.1
     Package::Reaper:               0.1
+    Sub::Install:                  0
     UNIVERSAL::require:            0.1
 meta-spec:
     url:     http://module-build.sourceforge.net/META-spec-v1.2.html

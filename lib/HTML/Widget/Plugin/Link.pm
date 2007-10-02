@@ -3,7 +3,9 @@ use strict;
 use warnings;
 
 package HTML::Widget::Plugin::Link;
-use base qw(HTML::Widget::Plugin);
+
+use HTML::Widget::Plugin ();
+BEGIN { our @ISA = 'HTML::Widget::Plugin' };
 
 =head1 NAME
 
@@ -11,11 +13,11 @@ HTML::Widget::Plugin::Link - a hyperlink
 
 =head1 VERSION
 
-version 0.059
+version 0.061
 
 =cut
 
-our $VERSION = '0.059';
+our $VERSION = '0.061';
 
 =head1 DESCRIPTION
 
@@ -66,7 +68,7 @@ is used.  If both options are provided, an exception is thrown.
 
 sub _attribute_args { qw(href title) }
 
-sub link {
+sub link { ## no critic Builtin
   my ($self, $factory, $arg) = @_;
 
   $arg->{attr}{name} = $arg->{attr}{id} if not defined $arg->{attr}{name};

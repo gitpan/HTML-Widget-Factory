@@ -10,11 +10,11 @@ HTML::Widget::Factory - churn out HTML widgets
 
 =head1 VERSION
 
-version 0.059
+version 0.061
 
 =cut
 
-our $VERSION = '0.059';
+our $VERSION = '0.061';
 
 =head1 SYNOPSIS
 
@@ -81,7 +81,7 @@ sub __mix_in {
   for my $plugin (@plugins) {
     unless ($plugin =~ /::(__)?GENERATED\1::/ and
               Package::Generator->package_exists($plugin)) {
-      $plugin->require or die $@;
+      $plugin->require or die $@; ## no critic Carp
     }
     $plugin->import({ into => $class });
   }
@@ -116,7 +116,8 @@ sub new {
     $reaper = Package::Reaper->new($obj_class);
   }
 
-  bless {
+  # for some reason PPI/Perl::Critic think this is multiple statements:
+  bless { ## no critic
     ($reaper ? (reaper => $reaper) : ()),
     plugins => \@plugins,
   } => $obj_class;
