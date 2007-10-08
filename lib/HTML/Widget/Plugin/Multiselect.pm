@@ -13,11 +13,11 @@ HTML::Widget::Plugin::Multiselect - widget for multiple selections from a list
 
 =head1 VERSION
 
-version 0.061
+version 0.062
 
 =cut
 
-our $VERSION = '0.061';
+our $VERSION = '0.062';
 
 =head1 DESCRIPTION
 
@@ -61,6 +61,7 @@ sub multiselect {
   my ($self, $factory, $arg) = @_;
 
   $arg->{attr}{name} = $arg->{attr}{id} if not defined $arg->{attr}{name};
+  $arg->{attr}{multiple} = 'multiple';
 
   if ($arg->{values}) {
     $arg->{value} = delete $arg->{values};
