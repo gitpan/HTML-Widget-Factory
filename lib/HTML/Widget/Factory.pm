@@ -1,4 +1,4 @@
-
+use 5.006;
 use strict;
 use warnings;
 
@@ -10,11 +10,11 @@ HTML::Widget::Factory - churn out HTML widgets
 
 =head1 VERSION
 
-version 0.065
+version 0.066
 
 =cut
 
-our $VERSION = '0.065';
+our $VERSION = '0.066';
 
 =head1 SYNOPSIS
 

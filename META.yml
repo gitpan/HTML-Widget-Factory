@@ -1,20 +1,25 @@
---- #YAML:1.0
-name:                HTML-Widget-Factory
-version:             0.065
-abstract:            ~
-license:             perl
-author:              
-    - Ricardo SIGNES <rjbs@cpan.org>
-generated_by:        ExtUtils::MakeMaker version 6.42
-distribution_type:   module
-requires:     
-    HTML::Element:                 0
-    List::MoreUtils:               0
-    Module::Pluggable:             2.9
-    Package::Generator:            0.1
-    Package::Reaper:               0.1
-    Sub::Install:                  0
-    UNIVERSAL::require:            0.1
+---
+abstract: 'churn out HTML widgets'
+author:
+  - 'Ricardo SIGNES <C<rjbs @ cpan.org>>'
+distribution_type: module
+generated_by: 'Module::Install version 0.71'
+license: perl
 meta-spec:
-    url:     http://module-build.sourceforge.net/META-spec-v1.3.html
-    version: 1.3
+  url: http://module-build.sourceforge.net/META-spec-v1.3.html
+  version: 1.3
+name: HTML-Widget-Factory
+no_index:
+  directory:
+    - inc
+    - t
+requires:
+  HTML::Element: 0
+  List::MoreUtils: 0
+  Module::Pluggable: 2.9
+  Package::Generator: 0.1
+  Package::Reaper: 0.1
+  Sub::Install: 0
+  UNIVERSAL::require: 0.1
+  perl: 5.6.0
+version: 0.066
