@@ -13,11 +13,11 @@ HTML::Widget::Plugin::Attrs - an HTML attribute string
 
 =head1 VERSION
 
-version 0.066
+version 0.067
 
 =cut
 
-our $VERSION = '0.066';
+our $VERSION = '0.067';
 
 =head1 DESCRIPTION
 
@@ -70,7 +70,7 @@ All attributes not beginning with a dash will be treated as attributes for the
 attribute string.  Boolean attributes will always have the attribute name as
 the value if true, and will be omitted if false.
 
-If both C<-for> and C<-bool> are given, they are unioned.
+If both C<-tag> and C<-bool> are given, they are unioned.
 
 =cut
 
@@ -88,7 +88,7 @@ sub attrs {
   $bool{lc $_} = 1 for @{ $arg->{-bool} || [] };
   
   require HTML::Tagset;
-  if ($arg->{-for} and my $entry = $HTML::Tagset::boolean_attr{$arg->{-for}}) {
+  if ($arg->{-tag} and my $entry = $HTML::Tagset::boolean_attr{$arg->{-tag}}) {
     $bool{lc $_} = 1 for (ref $entry ? keys %$entry : $entry);
   }
 

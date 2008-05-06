@@ -10,11 +10,11 @@ HTML::Widget::Plugin - base class for HTML widgets
 
 =head1 VERSION
 
-version 0.066
+version 0.067
 
 =cut
 
-our $VERSION = '0.066';
+our $VERSION = '0.067';
 
 use Carp ();
 use Class::ISA;
@@ -70,7 +70,7 @@ sub attribute_args {
   my ($class) = shift;
   my @attributes;
 
-  for ($class, Class::ISA::super_path($class)) {
+  for (Class::ISA::self_and_super_path($class)) {
     next unless $_->can('_attribute_args');
     push @attributes, $_->_attribute_args(@_);
   }
@@ -131,6 +131,12 @@ sub import {
 
     Carp::croak "$target can already provide widget '$widget'"
       if $target->can($install_to);
+
+    {
+      no strict 'refs';
+      my $pw = \%{"$target\::_provided_widgets"};
+      $pw->{ $install_to } = 1;
+    }
   
     Carp::croak
       "$class claims to provide widget '$widget' but has no such method"
