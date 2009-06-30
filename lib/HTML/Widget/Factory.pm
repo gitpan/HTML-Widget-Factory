@@ -10,11 +10,11 @@ HTML::Widget::Factory - churn out HTML widgets
 
 =head1 VERSION
 
-version 0.069
+version 0.070
 
 =cut
 
-our $VERSION = '0.069';
+our $VERSION = '0.070';
 
 =head1 SYNOPSIS
 
@@ -44,7 +44,6 @@ use Module::Pluggable
 
 use Package::Generator;
 use Package::Reaper;
-use UNIVERSAL::require;
 
 =head1 METHODS
 
@@ -82,7 +81,7 @@ sub __mix_in {
   for my $plugin (@plugins) {
     unless ($plugin =~ /::(__)?GENERATED\1::/ and
               Package::Generator->package_exists($plugin)) {
-      $plugin->require or die $@; ## no critic Carp
+      eval "require $plugin; 1" or die $@; ## no critic Carp
     }
     $plugin->import({ into => $class });
   }
