@@ -7,7 +7,7 @@ package HTML::Widget::Plugin::Input;
 use HTML::Widget::Plugin ();
 BEGIN { our @ISA = 'HTML::Widget::Plugin' };
 
-our $VERSION = '0.070';
+our $VERSION = '0.080';
 
 =head1 NAME
 
@@ -68,7 +68,7 @@ different plugin, instead.
 
 =cut
 
-sub _attribute_args { qw(type value size maxlength) }
+sub _attribute_args { qw(disabled type value size maxlength) }
 sub _boolean_args   { qw(disabled) }
 
 sub input {

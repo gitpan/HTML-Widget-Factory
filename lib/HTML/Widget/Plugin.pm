@@ -1,7 +1,5 @@
-
 use strict;
 use warnings;
-
 package HTML::Widget::Plugin;
 
 =head1 NAME
@@ -10,15 +8,15 @@ HTML::Widget::Plugin - base class for HTML widgets
 
 =head1 VERSION
 
-version 0.070
+version 0.080
 
 =cut
 
-our $VERSION = '0.070';
+our $VERSION = '0.080';
 
 use Carp ();
-use Class::ISA;
 use List::MoreUtils qw(uniq);
+use MRO::Compat;
 use Sub::Install;
 
 =head1 DESCRIPTION
@@ -70,7 +68,7 @@ sub attribute_args {
   my ($class) = shift;
   my @attributes;
 
-  for (Class::ISA::self_and_super_path($class)) {
+  for (@{ mro::get_linear_isa($class) }) {
     next unless $_->can('_attribute_args');
     push @attributes, $_->_attribute_args(@_);
   }
@@ -95,7 +93,7 @@ sub boolean_args {
   my ($class) = shift;
   my @attributes;
 
-  for ($class, Class::ISA::super_path($class)) {
+  for ($class, @{ mro::get_linear_isa($class) }) {
     next unless $_->can('_boolean_args');
     push @attributes, $_->_boolean_args(@_);
   }
