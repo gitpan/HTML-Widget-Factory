@@ -6,7 +6,7 @@ package HTML::Widget::Plugin::Checkbox;
 use HTML::Widget::Plugin ();
 BEGIN { our @ISA = 'HTML::Widget::Plugin' };
 
-our $VERSION = '0.081';
+our $VERSION = '0.082';
 
 =head1 NAME
 
@@ -61,8 +61,8 @@ is checked.
 
 =cut
 
-sub _attribute_args { qw(checked value) }
-sub _boolean_args   { qw(checked) }
+sub _attribute_args { qw(checked disabled value) }
+sub _boolean_args   { qw(checked disabled) }
 
 sub checkbox {
   my ($self, $factory, $arg) = @_;
