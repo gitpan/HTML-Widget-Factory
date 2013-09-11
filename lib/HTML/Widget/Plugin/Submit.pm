@@ -1,16 +1,42 @@
 use strict;
 use warnings;
-
 package HTML::Widget::Plugin::Submit;
+{
+  $HTML::Widget::Plugin::Submit::VERSION = '0.083';
+}
+use parent 'HTML::Widget::Plugin::Input';
+# ABSTRACT: for submit type inputs
 
-use HTML::Widget::Plugin::Input ();
-BEGIN { our @ISA = 'HTML::Widget::Plugin::Input' };
 
-our $VERSION = '0.082';
+sub provided_widgets { qw(submit) }
+
+
+use HTML::Element;
+
+sub submit {
+  my ($self, $factory, $arg) = @_;
+
+  $arg->{attr}{type} = 'submit';
+
+  # I suppose I could carp, here, if the type is altered, but... it's your
+  # foot, shoot it if you want. -- rjbs, 2007-02-28]
+
+  $self->build($factory, $arg);
+}
+
+1;
+
+__END__
+
+=pod
 
 =head1 NAME
 
 HTML::Widget::Plugin::Submit - for submit type inputs
+
+=head1 VERSION
+
+version 0.083
 
 =head1 SYNOPSIS
 
@@ -30,10 +56,6 @@ type submit.
 
 This plugin provides the following widgets: input
 
-=cut
-
-sub provided_widgets { qw(submit) }
-
 =head2 C< submit >
 
 This method returns a basic submit input.
@@ -50,30 +72,15 @@ as the text for the label on its face.
 
 =back
 
-=cut
-
-use HTML::Element;
-
-sub submit {
-  my ($self, $factory, $arg) = @_;
-
-  $arg->{attr}{type} = 'submit';
-
-  # I suppose I could carp, here, if the type is altered, but... it's your
-  # foot, shoot it if you want. -- rjbs, 2007-02-28]
-
-  $self->build($factory, $arg);
-}
-
 =head1 AUTHOR
 
-Ricardo SIGNES <C<rjbs @ cpan.org>>
+Ricardo SIGNES
 
-=head1 COPYRIGHT
+=head1 COPYRIGHT AND LICENSE
 
-Copyright (C) 2007, Ricardo SIGNES.  This is free software, released under the
-same terms as perl itself.
+This software is copyright (c) 2005 by Ricardo SIGNES.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
 
 =cut
-
-1;

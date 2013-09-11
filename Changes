@@ -1,5 +1,10 @@
 Revision history for HTML-Widget-Factory
 
+0.083     2013-09-11 10:47:02 America/New_York
+        - repackage to update bugtracker and repo
+        - stop using -T in test shebangs
+        - use parent.pm
+
 0.082     2010-05-04
           make "disabled" a bool arg for Checkbox
 

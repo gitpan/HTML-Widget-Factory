@@ -1,77 +1,19 @@
 use strict;
 use warnings;
-
 package HTML::Widget::Plugin::Link;
+{
+  $HTML::Widget::Plugin::Link::VERSION = '0.083';
+}
+use parent 'HTML::Widget::Plugin';
+# ABSTRACT: a hyperlink
 
-use HTML::Widget::Plugin ();
-BEGIN { our @ISA = 'HTML::Widget::Plugin' };
-
-our $VERSION = '0.082';
-
-=head1 NAME
-
-HTML::Widget::Plugin::Link - a hyperlink
-
-=head1 SYNOPSIS
-
-  $widget_factory->link({
-    text => "my favorite D&D pages",
-    href => 'http://rjbs.manxome.org/rubric/entries/tags/dnd',
-  });
-
-...or...
-
-  $widget_factory->link({
-    html => "some <em>great<em> d&amp;d pages",
-    href => 'http://rjbs.manxome.org/rubric/entries/tags/dnd',
-  });
-
-=head1 DESCRIPTION
-
-This plugin provides a basic input widget.
-
-=cut
 
 use Carp ();
 use HTML::Element;
 
-=head1 METHODS
-
-=head2 C< provided_widgets >
-
-This plugin provides the following widgets: link
-
-=cut
 
 sub provided_widgets { qw(link) }
 
-=head2 C< link >
-
-This method returns a basic text hyperlink.
-
-In addition to the generic L<HTML::Widget::Plugin> attributes, the following
-are valid arguments:
-
-=over
-
-=item href
-
-This is the URI to which the link ... um ... links.  If no href is supplied, an
-exception is thrown.
-
-=item html
-
-=item text
-
-Either of these may contain the text of created link.  If passed as C<html>, it
-is not escaped; if passed as C<text>, it is.  If no text is supplied, the href
-is used.  If both options are provided, an exception is thrown.
-
-=item 
-
-=back
-
-=cut
 
 sub _attribute_args { qw(href title) }
 
@@ -106,15 +48,77 @@ sub link { ## no critic Builtin
   return $xml;
 }
 
+1;
+
+__END__
+
+=pod
+
+=head1 NAME
+
+HTML::Widget::Plugin::Link - a hyperlink
+
+=head1 VERSION
+
+version 0.083
+
+=head1 SYNOPSIS
+
+  $widget_factory->link({
+    text => "my favorite D&D pages",
+    href => 'http://rjbs.manxome.org/rubric/entries/tags/dnd',
+  });
+
+...or...
+
+  $widget_factory->link({
+    html => "some <em>great<em> d&amp;d pages",
+    href => 'http://rjbs.manxome.org/rubric/entries/tags/dnd',
+  });
+
+=head1 DESCRIPTION
+
+This plugin provides a basic input widget.
+
+=head1 METHODS
+
+=head2 C< provided_widgets >
+
+This plugin provides the following widgets: link
+
+=head2 C< link >
+
+This method returns a basic text hyperlink.
+
+In addition to the generic L<HTML::Widget::Plugin> attributes, the following
+are valid arguments:
+
+=over
+
+=item href
+
+This is the URI to which the link ... um ... links.  If no href is supplied, an
+exception is thrown.
+
+=item html
+
+=item text
+
+Either of these may contain the text of created link.  If passed as C<html>, it
+is not escaped; if passed as C<text>, it is.  If no text is supplied, the href
+is used.  If both options are provided, an exception is thrown.
+
+=back
+
 =head1 AUTHOR
 
-Ricardo SIGNES <C<rjbs @ cpan.org>>
+Ricardo SIGNES
 
-=head1 COPYRIGHT
+=head1 COPYRIGHT AND LICENSE
 
-Copyright (C) 2005-2007, Ricardo SIGNES.  This is free software, released under
-the same terms as perl itself.
+This software is copyright (c) 2005 by Ricardo SIGNES.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
 
 =cut
-
-1;

@@ -1,41 +1,16 @@
 use strict;
 use warnings;
 package HTML::Widget::Plugin;
-
-=head1 NAME
-
-HTML::Widget::Plugin - base class for HTML widgets
-
-=head1 VERSION
-
-version 0.082
-
-=cut
-
-our $VERSION = '0.082';
+{
+  $HTML::Widget::Plugin::VERSION = '0.083';
+}
+# ABSTRACT: base class for HTML widgets
 
 use Carp ();
 use List::MoreUtils qw(uniq);
 use MRO::Compat;
 use Sub::Install;
 
-=head1 DESCRIPTION
-
-This class provides a simple way to write plugins for HTML::Widget::Factory.
-
-=head1 METHODS
-
-=head2 C< rewrite_arg >
-
- $arg = $plugin->rewrite_arg($arg);
-
-This method returns a reference to a hash of arguments, rewriting the given
-hash reference to place arguments that are intended to become element
-attributes into the C<attr> parameter.
-
-It moves attributes listed in the results of the C<attribute_args> method.
-
-=cut
 
 sub rewrite_arg {
   my ($class, $given_arg) = @_;
@@ -53,16 +28,6 @@ sub rewrite_arg {
   return $arg;
 }
 
-=head2 C< attribute_args >
-
-This method returns a list of argument names, the values of which should be
-used as HTML element attributes.
-
-The default implementation climbs the plugin's inheritance tree, calling
-C<_attribute_args> and pushing all the results onto a list from which unique
-results are then returned.
-
-=cut
 
 sub attribute_args {
   my ($class) = shift;
@@ -74,20 +39,10 @@ sub attribute_args {
   }
 
   return uniq @attributes;
-}   
+}
 
 sub _attribute_args { qw(id name class tabindex) }
 
-=head2 C< boolean_args >
-
-This method returns a list of argument names, the values of which should be
-treated as booleans.
-
-The default implementation climbs the plugin's inheritance tree, calling
-C<_boolean_args> and pushing all the results onto a list from which unique
-results are then returned.
-
-=cut
 
 sub boolean_args {
   my ($class) = shift;
@@ -103,12 +58,6 @@ sub boolean_args {
 
 sub _boolean_args { () }
 
-=head2 C< provided_widgets >
-
-This method should be implemented by any plugin.  It returns a list of method
-names which should be imported from the plugin into HTML::Widget::Factory.
-
-=cut
 
 sub provided_widgets {
   Carp::croak
@@ -138,7 +87,7 @@ sub import {
       my $pw = \%{"$target\::_provided_widgets"};
       $pw->{ $install_to } = 1;
     }
-  
+
     Carp::croak
       "$class claims to provide widget '$widget' but has no such method"
       unless $class->can($widget);
@@ -156,15 +105,68 @@ sub import {
   }
 }
 
+1;
+
+__END__
+
+=pod
+
+=head1 NAME
+
+HTML::Widget::Plugin - base class for HTML widgets
+
+=head1 VERSION
+
+version 0.083
+
+=head1 DESCRIPTION
+
+This class provides a simple way to write plugins for HTML::Widget::Factory.
+
+=head1 METHODS
+
+=head2 C< rewrite_arg >
+
+ $arg = $plugin->rewrite_arg($arg);
+
+This method returns a reference to a hash of arguments, rewriting the given
+hash reference to place arguments that are intended to become element
+attributes into the C<attr> parameter.
+
+It moves attributes listed in the results of the C<attribute_args> method.
+
+=head2 C< attribute_args >
+
+This method returns a list of argument names, the values of which should be
+used as HTML element attributes.
+
+The default implementation climbs the plugin's inheritance tree, calling
+C<_attribute_args> and pushing all the results onto a list from which unique
+results are then returned.
+
+=head2 C< boolean_args >
+
+This method returns a list of argument names, the values of which should be
+treated as booleans.
+
+The default implementation climbs the plugin's inheritance tree, calling
+C<_boolean_args> and pushing all the results onto a list from which unique
+results are then returned.
+
+=head2 C< provided_widgets >
+
+This method should be implemented by any plugin.  It returns a list of method
+names which should be imported from the plugin into HTML::Widget::Factory.
+
 =head1 AUTHOR
 
-Ricardo SIGNES <C<rjbs @ cpan.org>>
+Ricardo SIGNES
 
-=head1 COPYRIGHT
+=head1 COPYRIGHT AND LICENSE
 
-Copyright (C) 2005-2007, Ricardo SIGNES.  This is free software, released under
-the same terms as perl itself.
+This software is copyright (c) 2005 by Ricardo SIGNES.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
 
 =cut
-
-1;

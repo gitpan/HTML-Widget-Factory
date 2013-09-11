@@ -1,34 +1,78 @@
 use strict;
 use warnings;
-
 package HTML::Widget::Plugin::Attrs;
+{
+  $HTML::Widget::Plugin::Attrs::VERSION = '0.083';
+}
+use parent 'HTML::Widget::Plugin';
+# ABSTRACT: an HTML attribute string
 
-use HTML::Widget::Plugin ();
-BEGIN { our @ISA = 'HTML::Widget::Plugin' };
 
-our $VERSION = '0.082';
+use HTML::Element;
+
+
+sub provided_widgets { qw(attrs) }
+
+
+# Note that we're totally replacing the standard args rewriting!  This is not
+# going to act quite like existing widget plugins! -- rjbs, 2008-05-05
+# ALL unless they are boolean args.
+sub rewrite_arg { return $_[1] }
+
+sub attrs {
+  my ($self, $factor, $arg) = @_;
+
+  my $attr = {};
+
+  my %bool;
+  $bool{lc $_} = 1 for @{ $arg->{-bool} || [] };
+
+  require HTML::Tagset;
+  if ($arg->{-tag} and my $entry = $HTML::Tagset::boolean_attr{$arg->{-tag}}) {
+    $bool{lc $_} = 1 for (ref $entry ? keys %$entry : $entry);
+  }
+
+  my $str = '';
+  for my $key (sort grep { $_ !~ /^-/ and defined $arg->{$_} } keys %$arg) {
+    my $is_bool = $bool{ lc $key };
+    next if $is_bool and not $arg->{$key};
+
+    $str .= HTML::Entities::encode_entities($key)
+         .  '="'
+         . ($is_bool ? HTML::Entities::encode_entities($key)
+                     : HTML::Entities::encode_entities($arg->{$key}))
+         .  '" ';
+  }
+
+  # Remove the trailing space that we're sure to have -- rjbs, 2008-05-05
+  substr $str, -1, 1, '' if length $str;
+
+  return $str;
+}
+
+1;
+
+__END__
+
+=pod
 
 =head1 NAME
 
 HTML::Widget::Plugin::Attrs - an HTML attribute string
 
+=head1 VERSION
+
+version 0.083
+
 =head1 DESCRIPTION
 
 This plugin produces HTML attribute strings.
-
-=cut
-
-use HTML::Element;
 
 =head1 METHODS
 
 =head2 C< provided_widgets >
 
 This plugin provides the following widgets: attrs
-
-=cut
-
-sub provided_widgets { qw(attrs) }
 
 =head2 C< attrs >
 
@@ -65,53 +109,15 @@ the value if true, and will be omitted if false.
 
 If both C<-tag> and C<-bool> are given, they are unioned.
 
-=cut
-
-# Note that we're totally replacing the standard args rewriting!  This is not
-# going to act quite like existing widget plugins! -- rjbs, 2008-05-05
-# ALL unless they are boolean args.
-sub rewrite_arg { return $_[1] }
-
-sub attrs {
-  my ($self, $factor, $arg) = @_;
-
-  my $attr = {};
-
-  my %bool;
-  $bool{lc $_} = 1 for @{ $arg->{-bool} || [] };
-  
-  require HTML::Tagset;
-  if ($arg->{-tag} and my $entry = $HTML::Tagset::boolean_attr{$arg->{-tag}}) {
-    $bool{lc $_} = 1 for (ref $entry ? keys %$entry : $entry);
-  }
-
-  my $str = '';
-  for my $key (sort grep { $_ !~ /^-/ and defined $arg->{$_} } keys %$arg) {
-    my $is_bool = $bool{ lc $key };
-    next if $is_bool and not $arg->{$key};
-
-    $str .= HTML::Entities::encode_entities($key)
-         .  '="'
-         . ($is_bool ? HTML::Entities::encode_entities($key)
-                     : HTML::Entities::encode_entities($arg->{$key}))
-         .  '" ';
-  }
-
-  # Remove the trailing space that we're sure to have -- rjbs, 2008-05-05
-  substr $str, -1, 1, '' if length $str;
-
-  return $str;
-}
-
 =head1 AUTHOR
 
-Ricardo SIGNES <C<rjbs @ cpan.org>>
+Ricardo SIGNES
 
-=head1 COPYRIGHT
+=head1 COPYRIGHT AND LICENSE
 
-Copyright (C) 2008, Ricardo SIGNES.  This is free software, released under the
-same terms as perl itself.
+This software is copyright (c) 2005 by Ricardo SIGNES.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
 
 =cut
-
-1;

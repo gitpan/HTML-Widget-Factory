@@ -1,14 +1,11 @@
 Changes
-inc/Module/Install.pm
-inc/Module/Install/AutoManifest.pm
-inc/Module/Install/Base.pm
-inc/Module/Install/Can.pm
-inc/Module/Install/ExtraTests.pm
-inc/Module/Install/Fetch.pm
-inc/Module/Install/Makefile.pm
-inc/Module/Install/Metadata.pm
-inc/Module/Install/Win32.pm
-inc/Module/Install/WriteAll.pm
+LICENSE
+MANIFEST
+META.json
+META.yml
+Makefile.PL
+README
+dist.ini
 lib/HTML/Widget/Factory.pm
 lib/HTML/Widget/Plugin.pm
 lib/HTML/Widget/Plugin/Attrs.pm
@@ -23,11 +20,8 @@ lib/HTML/Widget/Plugin/Radio.pm
 lib/HTML/Widget/Plugin/Select.pm
 lib/HTML/Widget/Plugin/Submit.pm
 lib/HTML/Widget/Plugin/Textarea.pm
-LICENSE
-Makefile.PL
-MANIFEST			This list of files
-META.yml
-README
+t/00-compile.t
+t/000-report-versions-tiny.t
 t/attrs.t
 t/basic.t
 t/button.t
@@ -44,5 +38,5 @@ t/radio.t
 t/select.t
 t/submit.t
 t/textarea.t
-xt/release/pod-coverage.t
-xt/release/pod.t
+xt/release/changes_has_content.t
+xt/release/pod-syntax.t

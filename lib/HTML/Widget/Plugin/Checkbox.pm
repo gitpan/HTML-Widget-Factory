@@ -1,16 +1,49 @@
 use strict;
 use warnings;
-
 package HTML::Widget::Plugin::Checkbox;
+{
+  $HTML::Widget::Plugin::Checkbox::VERSION = '0.083';
+}
+use parent 'HTML::Widget::Plugin';
 
-use HTML::Widget::Plugin ();
-BEGIN { our @ISA = 'HTML::Widget::Plugin' };
+# ABSTRACT: it's either [ ] or [x]
 
-our $VERSION = '0.082';
+
+use HTML::Element;
+
+
+sub provided_widgets { qw(checkbox) }
+
+
+sub _attribute_args { qw(checked disabled value) }
+sub _boolean_args   { qw(checked disabled) }
+
+sub checkbox {
+  my ($self, $factory, $arg) = @_;
+
+  $arg->{attr}{type} = 'checkbox';
+
+  $arg->{attr}{name} = $arg->{attr}{id} if not defined $arg->{attr}{name};
+
+  my $widget = HTML::Element->new('input');
+
+  $widget->attr($_ => $arg->{attr}{$_}) for keys %{ $arg->{attr} };
+  return $widget->as_XML;
+}
+
+1;
+
+__END__
+
+=pod
 
 =head1 NAME
 
 HTML::Widget::Plugin::Checkbox - it's either [ ] or [x]
+
+=head1 VERSION
+
+version 0.083
 
 =head1 SYNOPSIS
 
@@ -24,19 +57,11 @@ HTML::Widget::Plugin::Checkbox - it's either [ ] or [x]
 
 This plugin provides a widget for boolean checkbox widgets.
 
-=cut
-
-use HTML::Element;
-
 =head1 METHODS
 
 =head2 C< provided_widgets >
 
 This plugin provides the following widgets: checkbox
-
-=cut
-
-sub provided_widgets { qw(checkbox) }
 
 =head2 C< checkbox >
 
@@ -59,33 +84,15 @@ is checked.
 
 =back
 
-=cut
-
-sub _attribute_args { qw(checked disabled value) }
-sub _boolean_args   { qw(checked disabled) }
-
-sub checkbox {
-  my ($self, $factory, $arg) = @_;
-
-  $arg->{attr}{type} = 'checkbox';
-
-  $arg->{attr}{name} = $arg->{attr}{id} if not defined $arg->{attr}{name};
-
-  my $widget = HTML::Element->new('input');
-
-  $widget->attr($_ => $arg->{attr}{$_}) for keys %{ $arg->{attr} };
-  return $widget->as_XML;
-}
-
 =head1 AUTHOR
 
-Ricardo SIGNES <C<rjbs @ cpan.org>>
+Ricardo SIGNES
 
-=head1 COPYRIGHT
+=head1 COPYRIGHT AND LICENSE
 
-Copyright (C) 2005-2007, Ricardo SIGNES.  This is free software, released under
-the same terms as perl itself.
+This software is copyright (c) 2005 by Ricardo SIGNES.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
 
 =cut
-
-1;
