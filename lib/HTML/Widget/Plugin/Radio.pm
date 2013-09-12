@@ -2,7 +2,7 @@ use strict;
 use warnings;
 package HTML::Widget::Plugin::Radio;
 {
-  $HTML::Widget::Plugin::Radio::VERSION = '0.083';
+  $HTML::Widget::Plugin::Radio::VERSION = '0.100';
 }
 use parent 'HTML::Widget::Plugin';
 # ABSTRACT: a widget for sets of radio buttons
@@ -94,7 +94,7 @@ HTML::Widget::Plugin::Radio - a widget for sets of radio buttons
 
 =head1 VERSION
 
-version 0.083
+version 0.100
 
 =head1 SYNOPSIS
 

@@ -36,7 +36,7 @@ resources:
   bugtracker: https://github.com/rjbs/html-widget-factory/issues
   homepage: https://github.com/rjbs/html-widget-factory
   repository: https://github.com/rjbs/html-widget-factory.git
-version: 0.083
+version: 0.100
 x_Dist_Zilla:
   perl:
     version: 5.019003

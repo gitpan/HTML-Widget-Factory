@@ -41,7 +41,7 @@ my %WriteMakefileArgs = (
     "blib" => 0,
     "lib" => 0
   },
-  "VERSION" => "0.083",
+  "VERSION" => "0.100",
   "test" => {
     "TESTS" => "t/*.t"
   }

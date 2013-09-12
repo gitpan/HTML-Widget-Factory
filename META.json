@@ -65,7 +65,7 @@
          "web" : "https://github.com/rjbs/html-widget-factory"
       }
    },
-   "version" : "0.083",
+   "version" : "0.100",
    "x_Dist_Zilla" : {
       "perl" : {
          "version" : "5.019003"

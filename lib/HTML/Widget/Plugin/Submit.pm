@@ -2,7 +2,7 @@ use strict;
 use warnings;
 package HTML::Widget::Plugin::Submit;
 {
-  $HTML::Widget::Plugin::Submit::VERSION = '0.083';
+  $HTML::Widget::Plugin::Submit::VERSION = '0.100';
 }
 use parent 'HTML::Widget::Plugin::Input';
 # ABSTRACT: for submit type inputs
@@ -36,7 +36,7 @@ HTML::Widget::Plugin::Submit - for submit type inputs
 
 =head1 VERSION
 
-version 0.083
+version 0.100
 
 =head1 SYNOPSIS
 

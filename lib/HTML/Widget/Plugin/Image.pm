@@ -2,7 +2,7 @@ use strict;
 use warnings;
 package HTML::Widget::Plugin::Image;
 {
-  $HTML::Widget::Plugin::Image::VERSION = '0.083';
+  $HTML::Widget::Plugin::Image::VERSION = '0.100';
 }
 use parent 'HTML::Widget::Plugin';
 # ABSTRACT: an image object
@@ -47,7 +47,7 @@ HTML::Widget::Plugin::Image - an image object
 
 =head1 VERSION
 
-version 0.083
+version 0.100
 
 =head1 SYNOPSIS
 

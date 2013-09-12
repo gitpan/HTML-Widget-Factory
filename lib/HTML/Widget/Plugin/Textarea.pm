@@ -2,7 +2,7 @@ use strict;
 use warnings;
 package HTML::Widget::Plugin::Textarea;
 {
-  $HTML::Widget::Plugin::Textarea::VERSION = '0.083';
+  $HTML::Widget::Plugin::Textarea::VERSION = '0.100';
 }
 use parent 'HTML::Widget::Plugin';
 
@@ -43,7 +43,7 @@ HTML::Widget::Plugin::Textarea - a widget for a large text entry box
 
 =head1 VERSION
 
-version 0.083
+version 0.100
 
 =head1 SYNOPSIS
 
