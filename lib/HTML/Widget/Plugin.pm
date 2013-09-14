@@ -2,7 +2,7 @@ use strict;
 use warnings;
 package HTML::Widget::Plugin;
 {
-  $HTML::Widget::Plugin::VERSION = '0.100';
+  $HTML::Widget::Plugin::VERSION = '0.101';
 }
 # ABSTRACT: base class for HTML widgets
 
@@ -76,7 +76,7 @@ HTML::Widget::Plugin - base class for HTML widgets
 
 =head1 VERSION
 
-version 0.100
+version 0.101
 
 =head1 DESCRIPTION
 

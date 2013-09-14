@@ -2,7 +2,7 @@ use strict;
 use warnings;
 package HTML::Widget::Plugin::Multiselect;
 {
-  $HTML::Widget::Plugin::Multiselect::VERSION = '0.100';
+  $HTML::Widget::Plugin::Multiselect::VERSION = '0.101';
 }
 use parent 'HTML::Widget::Plugin::Select';
 # ABSTRACT: widget for multiple selections from a list
@@ -66,7 +66,7 @@ HTML::Widget::Plugin::Multiselect - widget for multiple selections from a list
 
 =head1 VERSION
 
-version 0.100
+version 0.101
 
 =head1 SYNOPSIS
 

@@ -56,16 +56,16 @@
    "release_status" : "stable",
    "resources" : {
       "bugtracker" : {
-         "web" : "https://github.com/rjbs/html-widget-factory/issues"
+         "web" : "https://github.com/rjbs/HTML-Widget-Factory/issues"
       },
-      "homepage" : "https://github.com/rjbs/html-widget-factory",
+      "homepage" : "https://github.com/rjbs/HTML-Widget-Factory",
       "repository" : {
          "type" : "git",
-         "url" : "https://github.com/rjbs/html-widget-factory.git",
-         "web" : "https://github.com/rjbs/html-widget-factory"
+         "url" : "https://github.com/rjbs/HTML-Widget-Factory.git",
+         "web" : "https://github.com/rjbs/HTML-Widget-Factory"
       }
    },
-   "version" : "0.100",
+   "version" : "0.101",
    "x_Dist_Zilla" : {
       "perl" : {
          "version" : "5.019003"

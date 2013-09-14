@@ -2,7 +2,7 @@ use strict;
 use warnings;
 package HTML::Widget::Plugin::Password;
 {
-  $HTML::Widget::Plugin::Password::VERSION = '0.100';
+  $HTML::Widget::Plugin::Password::VERSION = '0.101';
 }
 use parent 'HTML::Widget::Plugin::Input';
 # ABSTRACT: for SECRET input
@@ -40,7 +40,7 @@ HTML::Widget::Plugin::Password - for SECRET input
 
 =head1 VERSION
 
-version 0.100
+version 0.101
 
 =head1 SYNOPSIS
 

@@ -2,7 +2,7 @@ use strict;
 use warnings;
 package HTML::Widget::Plugin::Checkbox;
 {
-  $HTML::Widget::Plugin::Checkbox::VERSION = '0.100';
+  $HTML::Widget::Plugin::Checkbox::VERSION = '0.101';
 }
 use parent 'HTML::Widget::Plugin';
 
@@ -43,7 +43,7 @@ HTML::Widget::Plugin::Checkbox - it's either [ ] or [x]
 
 =head1 VERSION
 
-version 0.100
+version 0.101
 
 =head1 SYNOPSIS
 

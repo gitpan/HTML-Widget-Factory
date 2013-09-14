@@ -2,7 +2,7 @@ use strict;
 use warnings;
 package HTML::Widget::Plugin::Button;
 {
-  $HTML::Widget::Plugin::Button::VERSION = '0.100';
+  $HTML::Widget::Plugin::Button::VERSION = '0.101';
 }
 use parent 'HTML::Widget::Plugin';
 # ABSTRACT: a button for clicking
@@ -74,7 +74,7 @@ HTML::Widget::Plugin::Button - a button for clicking
 
 =head1 VERSION
 
-version 0.100
+version 0.101
 
 =head1 SYNOPSIS
 
