@@ -1,18 +1,88 @@
 use strict;
 use warnings;
 package HTML::Widget::Plugin::Radio;
-{
-  $HTML::Widget::Plugin::Radio::VERSION = '0.101';
-}
-use parent 'HTML::Widget::Plugin';
 # ABSTRACT: a widget for sets of radio buttons
+$HTML::Widget::Plugin::Radio::VERSION = '0.200';
+use parent 'HTML::Widget::Plugin';
 
+# =head1 SYNOPSIS
+#
+#   $widget_factory->radio({
+#     name    => 'radio',
+#     value   => 'value_1',
+#     options => [
+#       [ value_1 => "Description 1" ],
+#       [ value_2 => "Description 2" ],
+#       [ value_2 => "Description 2", 'optional-elem-id' ],
+#     ],
+#   });
+#
+# This will emit roughly:
+#
+#   <input type='radio' name='radio' value='value_1' id='radio-value_1'
+#   checked='checked'></input>
+#   <label for='radio-value_1'>Description 2</label>
+#
+#   <input type='radio' name='radio' value='value_2' id='radio-value_2'></input>
+#   <label for='radio-value_2'>Description 2</label>
+#
+#   <input type='radio' name='radio' value='value_3'
+#   id='optional-elem-id'></input>
+#   <label for='optional-elem-id'>Description 2</label>
+#
+# =head1 DESCRIPTION
+#
+# This plugin provides a radio button-set widget
+#
+# =cut
 
 use HTML::Element;
 
+# =head1 METHODS
+#
+# =head2 C< provided_widgets >
+#
+# This plugin provides the following widgets: radio
+#
+# =cut
 
 sub provided_widgets { qw(radio) }
 
+# =head2 C< radio >
+#
+# This method returns a set of radio buttons.
+#
+# In addition to the generic L<HTML::Widget::Plugin> attributes, the following
+# are valid arguments:
+#
+# =over
+#
+# =item disabled
+#
+# If true, this option indicates that the select widget can't be changed by the
+# user.
+#
+# =item ignore_invalid
+#
+# If this is given and true, an invalid value is ignored instead of throwing an
+# exception.
+#
+# =item options
+#
+# This option must be a reference to an array of allowed values, each of which
+# will get its own radio button.
+#
+# =item value
+#
+# If this argument is given, the option with this value will be pre-selected in
+# the widget's initial state.
+#
+# An exception will be thrown if more or less than one of the provided options
+# has this value.
+#
+# =back
+#
+# =cut
 
 sub _attribute_args { qw(disabled) }
 sub _boolean_args   { qw(disabled) }
@@ -64,6 +134,12 @@ sub radio {
   return join q{}, map { $_->as_XML } @widgets;
 }
 
+# =head2 C< validate_value >
+#
+# This method checks whether the given value option is valid.  See C<L</radio>>
+# for an explanation of its default rules.
+#
+# =cut
 
 sub validate_value {
   my ($class, $value, $options) = @_;
@@ -88,13 +164,15 @@ __END__
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 HTML::Widget::Plugin::Radio - a widget for sets of radio buttons
 
 =head1 VERSION
 
-version 0.101
+version 0.200
 
 =head1 SYNOPSIS
 

@@ -1,19 +1,57 @@
 use strict;
 use warnings;
 package HTML::Widget::Plugin::Image;
-{
-  $HTML::Widget::Plugin::Image::VERSION = '0.101';
-}
-use parent 'HTML::Widget::Plugin';
 # ABSTRACT: an image object
+$HTML::Widget::Plugin::Image::VERSION = '0.200';
+use parent 'HTML::Widget::Plugin';
 
+# =head1 SYNOPSIS
+#
+#   $widget_factory->image({
+#     src => 'http://example.com/example.jpg',
+#     alt => 'An Example Image',
+#   });
+#
+# =head1 DESCRIPTION
+#
+# This plugin provides a basic image widget.
+#
+# =cut
 
 use Carp ();
 use HTML::Element;
 
+# =head1 METHODS
+#
+# =head2 C< provided_widgets >
+#
+# This plugin provides the following widgets: image
+#
+# =cut
 
 sub provided_widgets { qw(image) }
 
+# =head2 C< image >
+#
+# This method returns a basic image element.
+#
+# In addition to the generic L<HTML::Widget::Plugin> attributes, the following
+# are valid arguments:
+#
+# =over
+#
+# =item src
+#
+# This is the source href for the image.  "href" is a synonym for src.  If no
+# href is supplied, an exception is thrown.
+#
+# =item alt
+#
+# This is the alt text for the image.
+#
+# =back
+#
+# =cut
 
 sub _attribute_args { qw(src alt) }
 
@@ -41,13 +79,15 @@ __END__
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 HTML::Widget::Plugin::Image - an image object
 
 =head1 VERSION
 
-version 0.101
+version 0.200
 
 =head1 SYNOPSIS
 

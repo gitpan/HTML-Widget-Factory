@@ -1,18 +1,71 @@
 use strict;
 use warnings;
 package HTML::Widget::Plugin::Button;
-{
-  $HTML::Widget::Plugin::Button::VERSION = '0.101';
-}
-use parent 'HTML::Widget::Plugin';
 # ABSTRACT: a button for clicking
+$HTML::Widget::Plugin::Button::VERSION = '0.200';
+use parent 'HTML::Widget::Plugin';
 
+# =head1 SYNOPSIS
+#
+#   $widget_factory->button({
+#     text => "submit & continue",
+#     type => 'submit',
+#   });
+#
+# ...or...
+#
+#   $widget_factory->button({
+#     html => "reset <em>all</em> content",
+#     type => 'reset',
+#   });
+#
+# =head1 DESCRIPTION
+#
+# This plugin provides a basic button widget.
+#
+# =cut
 
 use HTML::Element;
 
+# =head1 METHODS
+#
+# =head2 C< provided_widgets >
+#
+# This plugin provides the following widgets: input
+#
+# =cut
 
 sub provided_widgets { qw(button) }
 
+# =head2 C< button >
+#
+# This method returns simple button element.
+#
+# In addition to the generic L<HTML::Widget::Plugin> attributes, the following
+# are valid arguments:
+#
+# =over
+#
+# =item text
+#
+# =item html
+#
+# One of these options may be provided.  If text is provided, it is used as the
+# content of the button, after being entity encoded.  If html is provided, it is
+# used as the content of the button with no encoding performed.
+#
+# =item type
+#
+# This is the type of input button to be created.  Valid types are button,
+# submit, and reset.  The default is button.
+#
+# =item value
+#
+# This is the widget's initial value.
+#
+# =back
+#
+# =cut
 
 sub _attribute_args { qw(type value) }
 sub _boolean_args   { qw(disabled) }
@@ -23,6 +76,15 @@ sub button {
   $self->build($factory, $arg);
 }
 
+# =head2 C< build >
+#
+#   my $widget = $class->build($factory, $arg);
+#
+# This method does the actual construction of the input based on the args
+# collected by the widget-constructing method.  It is primarily here for
+# subclasses to exploit.
+#
+# =cut
 
 my %TYPES = map { $_ => 1 } qw(button reset submit);
 sub __is_valid_type {
@@ -68,13 +130,15 @@ __END__
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 HTML::Widget::Plugin::Button - a button for clicking
 
 =head1 VERSION
 
-version 0.101
+version 0.200
 
 =head1 SYNOPSIS
 
