@@ -33,7 +33,7 @@ resources:
   bugtracker: https://github.com/rjbs/HTML-Widget-Factory/issues
   homepage: https://github.com/rjbs/HTML-Widget-Factory
   repository: https://github.com/rjbs/HTML-Widget-Factory.git
-version: '0.200'
+version: '0.201'
 x_Dist_Zilla:
   perl:
     version: '5.019009'
@@ -61,7 +61,7 @@ x_Dist_Zilla:
           phase: build
           skip: []
       name: '@RJBS/RJBS-Outdated'
-      version: '0.017'
+      version: '0.018'
     -
       class: Dist::Zilla::Plugin::PromptIfStale
       config:
@@ -72,7 +72,7 @@ x_Dist_Zilla:
           phase: release
           skip: []
       name: '@RJBS/CPAN-Outdated'
-      version: '0.017'
+      version: '0.018'
     -
       class: Dist::Zilla::Plugin::PruneCruft
       name: '@RJBS/@Filter/PruneCruft'

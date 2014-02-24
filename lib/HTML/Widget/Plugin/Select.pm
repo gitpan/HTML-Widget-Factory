@@ -2,7 +2,7 @@ use strict;
 use warnings;
 package HTML::Widget::Plugin::Select;
 # ABSTRACT: a widget for selection from a list
-$HTML::Widget::Plugin::Select::VERSION = '0.200';
+$HTML::Widget::Plugin::Select::VERSION = '0.201';
 use parent 'HTML::Widget::Plugin';
 
 # =head1 SYNOPSIS
@@ -199,7 +199,7 @@ HTML::Widget::Plugin::Select - a widget for selection from a list
 
 =head1 VERSION
 
-version 0.200
+version 0.201
 
 =head1 SYNOPSIS
 

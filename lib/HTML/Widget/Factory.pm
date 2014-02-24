@@ -3,7 +3,7 @@ use strict;
 use warnings;
 package HTML::Widget::Factory;
 # ABSTRACT: churn out HTML widgets
-$HTML::Widget::Factory::VERSION = '0.200';
+$HTML::Widget::Factory::VERSION = '0.201';
 use Carp ();
 use Module::Load ();
 use MRO::Compat;
@@ -167,6 +167,8 @@ sub AUTOLOAD {
   my $widget_name = our $AUTOLOAD;
   $widget_name =~ s/.*:://;
 
+  return if $widget_name eq 'DESTROY' or $widget_name eq 'CLONE';
+
   my ($self, $given_arg) = @_;
   my $class = ref $self || $self;
   my $howto = $self->{widgets}{$widget_name};
@@ -176,7 +178,12 @@ sub AUTOLOAD {
     die sprintf $ErrorMsg, $widget_name, $class, $callfile, $callline;
   }
 
-  my ($plugin, $method) = @$howto{qw(plugin method)};
+  return $self->_build_widget(@$howto{qw(plugin method)}, $given_arg);
+}
+
+sub _build_widget {
+  my ($self, $plugin, $method, $given_arg) = @_;
+
   my $arg = $plugin->rewrite_arg($given_arg, $method);
 
   return $plugin->$method($self, $arg);
@@ -270,7 +277,7 @@ HTML::Widget::Factory - churn out HTML widgets
 
 =head1 VERSION
 
-version 0.200
+version 0.201
 
 =head1 SYNOPSIS
 

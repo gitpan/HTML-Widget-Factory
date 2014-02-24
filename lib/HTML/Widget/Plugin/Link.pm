@@ -2,7 +2,7 @@ use strict;
 use warnings;
 package HTML::Widget::Plugin::Link;
 # ABSTRACT: a hyperlink
-$HTML::Widget::Plugin::Link::VERSION = '0.200';
+$HTML::Widget::Plugin::Link::VERSION = '0.201';
 use parent 'HTML::Widget::Plugin';
 
 # =head1 SYNOPSIS
@@ -111,7 +111,7 @@ HTML::Widget::Plugin::Link - a hyperlink
 
 =head1 VERSION
 
-version 0.200
+version 0.201
 
 =head1 SYNOPSIS
 

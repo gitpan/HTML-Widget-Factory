@@ -2,7 +2,7 @@ use strict;
 use warnings;
 package HTML::Widget::Plugin::Input;
 # ABSTRACT: the most basic input widget
-$HTML::Widget::Plugin::Input::VERSION = '0.200';
+$HTML::Widget::Plugin::Input::VERSION = '0.201';
 use parent 'HTML::Widget::Plugin';
 
 # =head1 SYNOPSIS
@@ -144,7 +144,7 @@ HTML::Widget::Plugin::Input - the most basic input widget
 
 =head1 VERSION
 
-version 0.200
+version 0.201
 
 =head1 SYNOPSIS
 
