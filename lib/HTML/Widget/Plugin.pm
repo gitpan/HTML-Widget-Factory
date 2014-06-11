@@ -2,27 +2,27 @@ use strict;
 use warnings;
 package HTML::Widget::Plugin;
 # ABSTRACT: base class for HTML widgets
-$HTML::Widget::Plugin::VERSION = '0.201';
+$HTML::Widget::Plugin::VERSION = '0.202';
 use Carp ();
 use List::MoreUtils qw(uniq);
 use MRO::Compat;
 use Scalar::Util qw(reftype);
 use Sub::Install;
 
-# =head1 DESCRIPTION
-#
-# This class provides a simple way to write plugins for HTML::Widget::Factory.
-#
-# =head1 METHODS
-#
-# =head2 new
-#
-#   my $plugin = Plugin->new( \%arg );
-#
-# The default plugin constructor is really simple.  It requires that the argument
-# is either a hashref or not given.
-#
-# =cut
+#pod =head1 DESCRIPTION
+#pod
+#pod This class provides a simple way to write plugins for HTML::Widget::Factory.
+#pod
+#pod =head1 METHODS
+#pod
+#pod =head2 new
+#pod
+#pod   my $plugin = Plugin->new( \%arg );
+#pod
+#pod The default plugin constructor is really simple.  It requires that the argument
+#pod is either a hashref or not given.
+#pod
+#pod =cut
 
 sub new {
   my ($class, $arg) = @_;
@@ -52,17 +52,17 @@ sub new {
   }, $class;
 }
 
-# =head2 rewrite_arg
-#
-#  $arg = $plugin->rewrite_arg($arg);
-#
-# This method returns a reference to a hash of arguments, rewriting the given
-# hash reference to place arguments that are intended to become element
-# attributes into the C<attr> parameter.
-#
-# It moves attributes listed in the results of the C<attribute_args> method.
-#
-# =cut
+#pod =head2 rewrite_arg
+#pod
+#pod  $arg = $plugin->rewrite_arg($arg);
+#pod
+#pod This method returns a reference to a hash of arguments, rewriting the given
+#pod hash reference to place arguments that are intended to become element
+#pod attributes into the C<attr> parameter.
+#pod
+#pod It moves attributes listed in the results of the C<attribute_args> method.
+#pod
+#pod =cut
 
 sub rewrite_arg {
   my ($class, $given_arg) = @_;
@@ -80,16 +80,16 @@ sub rewrite_arg {
   return $arg;
 }
 
-# =head2 C< attribute_args >
-#
-# This method returns a list of argument names, the values of which should be
-# used as HTML element attributes.
-#
-# The default implementation climbs the plugin's inheritance tree, calling
-# C<_attribute_args> and pushing all the results onto a list from which unique
-# results are then returned.
-#
-# =cut
+#pod =head2 C< attribute_args >
+#pod
+#pod This method returns a list of argument names, the values of which should be
+#pod used as HTML element attributes.
+#pod
+#pod The default implementation climbs the plugin's inheritance tree, calling
+#pod C<_attribute_args> and pushing all the results onto a list from which unique
+#pod results are then returned.
+#pod
+#pod =cut
 
 sub attribute_args {
   my ($self) = shift;
@@ -98,16 +98,16 @@ sub attribute_args {
 
 sub _attribute_args { qw(id name class tabindex) }
 
-# =head2 C< boolean_args >
-#
-# This method returns a list of argument names, the values of which should be
-# treated as booleans.
-#
-# The default implementation climbs the plugin's inheritance tree, calling
-# C<_boolean_args> and pushing all the results onto a list from which unique
-# results are then returned.
-#
-# =cut
+#pod =head2 C< boolean_args >
+#pod
+#pod This method returns a list of argument names, the values of which should be
+#pod treated as booleans.
+#pod
+#pod The default implementation climbs the plugin's inheritance tree, calling
+#pod C<_boolean_args> and pushing all the results onto a list from which unique
+#pod results are then returned.
+#pod
+#pod =cut
 
 sub boolean_args {
   my ($self) = shift;
@@ -116,12 +116,12 @@ sub boolean_args {
 
 sub _boolean_args { () }
 
-# =head2 C< provided_widgets >
-#
-# This method should be implemented by any plugin.  It returns a list of method
-# names which a factor should delegate to this plugin.
-#
-# =cut
+#pod =head2 C< provided_widgets >
+#pod
+#pod This method should be implemented by any plugin.  It returns a list of method
+#pod names which a factor should delegate to this plugin.
+#pod
+#pod =cut
 
 sub provided_widgets {
   Carp::croak
@@ -142,7 +142,7 @@ HTML::Widget::Plugin - base class for HTML widgets
 
 =head1 VERSION
 
-version 0.201
+version 0.202
 
 =head1 DESCRIPTION
 

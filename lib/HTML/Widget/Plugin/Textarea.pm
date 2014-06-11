@@ -2,57 +2,57 @@ use strict;
 use warnings;
 package HTML::Widget::Plugin::Textarea;
 # ABSTRACT: a widget for a large text entry box
-$HTML::Widget::Plugin::Textarea::VERSION = '0.201';
+$HTML::Widget::Plugin::Textarea::VERSION = '0.202';
 use parent 'HTML::Widget::Plugin';
 
-# =head1 SYNOPSIS
-#
-#   $widget_factory->textarea({
-#     id    => 'elem-id', # also used as control name, if no name given
-#     value => $big_hunk_of_text,
-#   });
-#
-# =head1 DESCRIPTION
-#
-# This plugin provides a text-entry area widget.
-#
-# The C<default_classes> attribute may be used to add a default class to every
-# produced input.  This class cannot be overridden.
-#
-#   my $plugin = HTML::Widget::Factory::Input->new({
-#     default_classes => [ qw(foo bar) ],
-#   });
-#
-# =head1 METHODS
-#
-# =head2 C< provided_widgets >
-#
-# This plugin provides the following widgets: textarea
-#
-# =cut
+#pod =head1 SYNOPSIS
+#pod
+#pod   $widget_factory->textarea({
+#pod     id    => 'elem-id', # also used as control name, if no name given
+#pod     value => $big_hunk_of_text,
+#pod   });
+#pod
+#pod =head1 DESCRIPTION
+#pod
+#pod This plugin provides a text-entry area widget.
+#pod
+#pod The C<default_classes> attribute may be used to add a default class to every
+#pod produced input.  This class cannot be overridden.
+#pod
+#pod   my $plugin = HTML::Widget::Factory::Input->new({
+#pod     default_classes => [ qw(foo bar) ],
+#pod   });
+#pod
+#pod =head1 METHODS
+#pod
+#pod =head2 C< provided_widgets >
+#pod
+#pod This plugin provides the following widgets: textarea
+#pod
+#pod =cut
 
 sub provided_widgets { qw(textarea) }
 
-# =head2 C< textarea >
-#
-# This method returns a text-entry area widget.
-#
-# In addition to the generic L<HTML::Widget::Plugin> attributes, the following
-# are valid arguments:
-#
-# =over
-#
-# =item disabled
-#
-# If true, this option indicates that the widget can't be changed by the user.
-#
-# =item value
-#
-# If this argument is given, the widget will be initially populated by its value.
-#
-# =back
-#
-# =cut
+#pod =head2 C< textarea >
+#pod
+#pod This method returns a text-entry area widget.
+#pod
+#pod In addition to the generic L<HTML::Widget::Plugin> attributes, the following
+#pod are valid arguments:
+#pod
+#pod =over
+#pod
+#pod =item disabled
+#pod
+#pod If true, this option indicates that the widget can't be changed by the user.
+#pod
+#pod =item value
+#pod
+#pod If this argument is given, the widget will be initially populated by its value.
+#pod
+#pod =back
+#pod
+#pod =cut
 
 use HTML::Element;
 
@@ -74,9 +74,9 @@ sub textarea {
 }
 
 sub rewrite_arg {
-  my ($self, $arg) = @_;
+  my ($self, $arg, @rest) = @_;
 
-  $arg = $self->SUPER::rewrite_arg($arg);
+  $arg = $self->SUPER::rewrite_arg($arg, @rest);
 
   if ($self->{default_classes}) {
     my $class = join q{ }, @{ $self->{default_classes} };
@@ -102,7 +102,7 @@ HTML::Widget::Plugin::Textarea - a widget for a large text entry box
 
 =head1 VERSION
 
-version 0.201
+version 0.202
 
 =head1 SYNOPSIS
 

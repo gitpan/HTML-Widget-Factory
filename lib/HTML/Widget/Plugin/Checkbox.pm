@@ -2,57 +2,57 @@ use strict;
 use warnings;
 package HTML::Widget::Plugin::Checkbox;
 # ABSTRACT: it's either [ ] or [x]
-$HTML::Widget::Plugin::Checkbox::VERSION = '0.201';
+$HTML::Widget::Plugin::Checkbox::VERSION = '0.202';
 use parent 'HTML::Widget::Plugin';
 
-# =head1 SYNOPSIS
-#
-#   $widget_factory->checkbox({
-#     id      => 'checkbox-id',    # also used as default for control name
-#     value   => 'checkbox-value', # -not- the "am I checked?" setting
-#     checked => $true_or_false,
-#   });
-#
-# =head1 DESCRIPTION
-#
-# This plugin provides a widget for boolean checkbox widgets.
-#
-# =cut
+#pod =head1 SYNOPSIS
+#pod
+#pod   $widget_factory->checkbox({
+#pod     id      => 'checkbox-id',    # also used as default for control name
+#pod     value   => 'checkbox-value', # -not- the "am I checked?" setting
+#pod     checked => $true_or_false,
+#pod   });
+#pod
+#pod =head1 DESCRIPTION
+#pod
+#pod This plugin provides a widget for boolean checkbox widgets.
+#pod
+#pod =cut
 
 use HTML::Element;
 
-# =head1 METHODS
-#
-# =head2 C< provided_widgets >
-#
-# This plugin provides the following widgets: checkbox
-#
-# =cut
+#pod =head1 METHODS
+#pod
+#pod =head2 C< provided_widgets >
+#pod
+#pod This plugin provides the following widgets: checkbox
+#pod
+#pod =cut
 
 sub provided_widgets { qw(checkbox) }
 
-# =head2 C< checkbox >
-#
-# This method returns a checkbox widget.
-#
-# In addition to the generic L<HTML::Widget::Plugin> attributes, the following
-# are valid arguments:
-#
-# =over
-#
-# =item checked
-#
-# This is the widget's initial state.  If true, the checkbox is checked.
-# Otherwise, it is not.
-#
-# =item value
-#
-# This is the value for the checkbox, not to be confused with whether or not it
-# is checked.
-#
-# =back
-#
-# =cut
+#pod =head2 C< checkbox >
+#pod
+#pod This method returns a checkbox widget.
+#pod
+#pod In addition to the generic L<HTML::Widget::Plugin> attributes, the following
+#pod are valid arguments:
+#pod
+#pod =over
+#pod
+#pod =item checked
+#pod
+#pod This is the widget's initial state.  If true, the checkbox is checked.
+#pod Otherwise, it is not.
+#pod
+#pod =item value
+#pod
+#pod This is the value for the checkbox, not to be confused with whether or not it
+#pod is checked.
+#pod
+#pod =back
+#pod
+#pod =cut
 
 sub _attribute_args { qw(checked disabled value) }
 sub _boolean_args   { qw(checked disabled) }
@@ -84,7 +84,7 @@ HTML::Widget::Plugin::Checkbox - it's either [ ] or [x]
 
 =head1 VERSION
 
-version 0.201
+version 0.202
 
 =head1 SYNOPSIS
 

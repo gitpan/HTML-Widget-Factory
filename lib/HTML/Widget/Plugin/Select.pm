@@ -2,80 +2,80 @@ use strict;
 use warnings;
 package HTML::Widget::Plugin::Select;
 # ABSTRACT: a widget for selection from a list
-$HTML::Widget::Plugin::Select::VERSION = '0.201';
+$HTML::Widget::Plugin::Select::VERSION = '0.202';
 use parent 'HTML::Widget::Plugin';
 
-# =head1 SYNOPSIS
-#
-#   $widget_factory->select({
-#     id      => 'the-selector', # if no name attr given, defaults to id value
-#     value   => 10,
-#     options => [
-#       [  0 => "Zero" ],
-#       [  5 => "Five" ],
-#       [ 10 => "Ten"  ],
-#     ],
-#   });
-#
-# =head1 DESCRIPTION
-#
-# This plugin provides a select-from-list widget.
-#
-# The C<default_classes> attribute may be used to add a default class to every
-# produced input.  This class cannot be overridden.
-#
-#   my $plugin = HTML::Widget::Factory::Input->new({
-#     default_classes => [ qw(foo bar) ],
-#   });
-#
-# =head1 METHODS
-#
-# =head2 C< provided_widgets >
-#
-# This plugin provides the following widgets: select
-#
-# =cut
+#pod =head1 SYNOPSIS
+#pod
+#pod   $widget_factory->select({
+#pod     id      => 'the-selector', # if no name attr given, defaults to id value
+#pod     value   => 10,
+#pod     options => [
+#pod       [  0 => "Zero" ],
+#pod       [  5 => "Five" ],
+#pod       [ 10 => "Ten"  ],
+#pod     ],
+#pod   });
+#pod
+#pod =head1 DESCRIPTION
+#pod
+#pod This plugin provides a select-from-list widget.
+#pod
+#pod The C<default_classes> attribute may be used to add a default class to every
+#pod produced input.  This class cannot be overridden.
+#pod
+#pod   my $plugin = HTML::Widget::Factory::Input->new({
+#pod     default_classes => [ qw(foo bar) ],
+#pod   });
+#pod
+#pod =head1 METHODS
+#pod
+#pod =head2 C< provided_widgets >
+#pod
+#pod This plugin provides the following widgets: select
+#pod
+#pod =cut
 
 sub provided_widgets { qw(select) }
 
-# =head2 C< select >
-#
-# This method returns a select-from-list widget.
-#
-# In addition to the generic L<HTML::Widget::Plugin> attributes, the following
-# are valid arguments:
-#
-# =over
-#
-# =item disabled
-#
-# If true, this option indicates that the select widget can't be changed by the
-# user.
-#
-# =item ignore_invalid
-#
-# If this is given and true, an invalid value is ignored instead of throwing an
-# exception.
-#
-# =item options
-#
-# This may be an arrayref of arrayrefs, each containing a value/name pair, or it
-# may be a hashref of values and names.
-#
-# Use the array form if you need multiple entries for a single value or if order
-# is important.
-#
-# =item value
-#
-# If this argument is given, the option with this value will be pre-selected in
-# the widget's initial state.
-#
-# An exception will be thrown if more or less than one of the provided options
-# has this value.
-#
-# =back
-#
-# =cut
+#pod =head2 C< select >
+#pod
+#pod This method returns a select-from-list widget.
+#pod
+#pod In addition to the generic L<HTML::Widget::Plugin> attributes, the following
+#pod are valid arguments:
+#pod
+#pod =over
+#pod
+#pod =item disabled
+#pod
+#pod If true, this option indicates that the select widget can't be changed by the
+#pod user.
+#pod
+#pod =item ignore_invalid
+#pod
+#pod If this is given and true, an invalid value is ignored instead of throwing an
+#pod exception.
+#pod
+#pod =item options
+#pod
+#pod This may be an arrayref of arrayrefs, each containing a value/name pair, or it
+#pod may be a hashref of values and names.
+#pod
+#pod Use the array form if you need multiple entries for a single value or if order
+#pod is important.
+#pod
+#pod =item value
+#pod
+#pod If this argument is given, the option with this value will be pre-selected in
+#pod the widget's initial state.
+#pod
+#pod An exception will be thrown if more or less than one of the provided options
+#pod has this value.
+#pod
+#pod =back
+#pod
+#pod =cut
 
 use HTML::Element;
 
@@ -88,14 +88,14 @@ sub select { ## no critic Builtin
   $self->build($factory, $arg);
 }
 
-# =head2 C< build >
-#
-#  my $widget = $class->build($factory, \%arg)
-#
-# This method does the actual construction of the widget based on the args set up
-# in the exported widget-constructing call.  It's here for subclasses to exploit.
-#
-# =cut
+#pod =head2 C< build >
+#pod
+#pod  my $widget = $class->build($factory, \%arg)
+#pod
+#pod This method does the actual construction of the widget based on the args set up
+#pod in the exported widget-constructing call.  It's here for subclasses to exploit.
+#pod
+#pod =cut
 
 sub build {
   my ($self, $factory, $arg) = @_;
@@ -124,15 +124,15 @@ sub build {
   return $widget->as_XML;
 }
 
-# =head2 C< make_option >
-#
-#   my $option = $class->make_option($factory, $value, $name, $arg);
-#
-# This method constructs the HTML::Element option element that will represent one
-# of the options that may be put into the select box.  This is here for
-# subclasses to exploit.
-#
-# =cut
+#pod =head2 C< make_option >
+#pod
+#pod   my $option = $class->make_option($factory, $value, $name, $arg);
+#pod
+#pod This method constructs the HTML::Element option element that will represent one
+#pod of the options that may be put into the select box.  This is here for
+#pod subclasses to exploit.
+#pod
+#pod =cut
 
 sub make_option {
   my ($self, $factory, $value, $name, $arg) = @_;
@@ -145,12 +145,12 @@ sub make_option {
   return $option;
 }
 
-# =head2 C< validate_value >
-#
-# This method checks whether the given value option is valid.  See C<L</select>>
-# for an explanation of its default rules.
-#
-# =cut
+#pod =head2 C< validate_value >
+#pod
+#pod This method checks whether the given value option is valid.  See C<L</select>>
+#pod for an explanation of its default rules.
+#pod
+#pod =cut
 
 sub validate_value {
   my ($class, $value, $options) = @_;
@@ -170,9 +170,9 @@ sub validate_value {
 }
 
 sub rewrite_arg {
-  my ($self, $arg) = @_;
+  my ($self, $arg, @rest) = @_;
 
-  $arg = $self->SUPER::rewrite_arg($arg);
+  $arg = $self->SUPER::rewrite_arg($arg, @rest);
 
   if ($self->{default_classes}) {
     my $class = join q{ }, @{ $self->{default_classes} };
@@ -199,7 +199,7 @@ HTML::Widget::Plugin::Select - a widget for selection from a list
 
 =head1 VERSION
 
-version 0.201
+version 0.202
 
 =head1 SYNOPSIS
 

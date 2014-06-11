@@ -2,56 +2,56 @@ use strict;
 use warnings;
 package HTML::Widget::Plugin::Image;
 # ABSTRACT: an image object
-$HTML::Widget::Plugin::Image::VERSION = '0.201';
+$HTML::Widget::Plugin::Image::VERSION = '0.202';
 use parent 'HTML::Widget::Plugin';
 
-# =head1 SYNOPSIS
-#
-#   $widget_factory->image({
-#     src => 'http://example.com/example.jpg',
-#     alt => 'An Example Image',
-#   });
-#
-# =head1 DESCRIPTION
-#
-# This plugin provides a basic image widget.
-#
-# =cut
+#pod =head1 SYNOPSIS
+#pod
+#pod   $widget_factory->image({
+#pod     src => 'http://example.com/example.jpg',
+#pod     alt => 'An Example Image',
+#pod   });
+#pod
+#pod =head1 DESCRIPTION
+#pod
+#pod This plugin provides a basic image widget.
+#pod
+#pod =cut
 
 use Carp ();
 use HTML::Element;
 
-# =head1 METHODS
-#
-# =head2 C< provided_widgets >
-#
-# This plugin provides the following widgets: image
-#
-# =cut
+#pod =head1 METHODS
+#pod
+#pod =head2 C< provided_widgets >
+#pod
+#pod This plugin provides the following widgets: image
+#pod
+#pod =cut
 
 sub provided_widgets { qw(image) }
 
-# =head2 C< image >
-#
-# This method returns a basic image element.
-#
-# In addition to the generic L<HTML::Widget::Plugin> attributes, the following
-# are valid arguments:
-#
-# =over
-#
-# =item src
-#
-# This is the source href for the image.  "href" is a synonym for src.  If no
-# href is supplied, an exception is thrown.
-#
-# =item alt
-#
-# This is the alt text for the image.
-#
-# =back
-#
-# =cut
+#pod =head2 C< image >
+#pod
+#pod This method returns a basic image element.
+#pod
+#pod In addition to the generic L<HTML::Widget::Plugin> attributes, the following
+#pod are valid arguments:
+#pod
+#pod =over
+#pod
+#pod =item src
+#pod
+#pod This is the source href for the image.  "href" is a synonym for src.  If no
+#pod href is supplied, an exception is thrown.
+#pod
+#pod =item alt
+#pod
+#pod This is the alt text for the image.
+#pod
+#pod =back
+#pod
+#pod =cut
 
 sub _attribute_args { qw(src alt) }
 
@@ -87,7 +87,7 @@ HTML::Widget::Plugin::Image - an image object
 
 =head1 VERSION
 
-version 0.201
+version 0.202
 
 =head1 SYNOPSIS
 
