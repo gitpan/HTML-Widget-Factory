@@ -3,7 +3,7 @@ use strict;
 use warnings;
 package HTML::Widget::Factory;
 # ABSTRACT: churn out HTML widgets
-$HTML::Widget::Factory::VERSION = '0.202';
+$HTML::Widget::Factory::VERSION = '0.203';
 use Carp ();
 use Module::Load ();
 use MRO::Compat;
@@ -277,7 +277,7 @@ HTML::Widget::Factory - churn out HTML widgets
 
 =head1 VERSION
 
-version 0.202
+version 0.203
 
 =head1 SYNOPSIS
 

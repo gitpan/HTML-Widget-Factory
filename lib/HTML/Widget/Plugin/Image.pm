@@ -2,7 +2,7 @@ use strict;
 use warnings;
 package HTML::Widget::Plugin::Image;
 # ABSTRACT: an image object
-$HTML::Widget::Plugin::Image::VERSION = '0.202';
+$HTML::Widget::Plugin::Image::VERSION = '0.203';
 use parent 'HTML::Widget::Plugin';
 
 #pod =head1 SYNOPSIS
@@ -87,7 +87,7 @@ HTML::Widget::Plugin::Image - an image object
 
 =head1 VERSION
 
-version 0.202
+version 0.203
 
 =head1 SYNOPSIS
 

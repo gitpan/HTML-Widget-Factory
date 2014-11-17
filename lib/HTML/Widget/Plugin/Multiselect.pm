@@ -2,7 +2,7 @@ use strict;
 use warnings;
 package HTML::Widget::Plugin::Multiselect;
 # ABSTRACT: widget for multiple selections from a list
-$HTML::Widget::Plugin::Multiselect::VERSION = '0.202';
+$HTML::Widget::Plugin::Multiselect::VERSION = '0.203';
 use parent 'HTML::Widget::Plugin::Select';
 
 #pod =head1 SYNOPSIS
@@ -120,7 +120,7 @@ HTML::Widget::Plugin::Multiselect - widget for multiple selections from a list
 
 =head1 VERSION
 
-version 0.202
+version 0.203
 
 =head1 SYNOPSIS
 

@@ -2,7 +2,7 @@ use strict;
 use warnings;
 package HTML::Widget::Plugin::Password;
 # ABSTRACT: for SECRET input
-$HTML::Widget::Plugin::Password::VERSION = '0.202';
+$HTML::Widget::Plugin::Password::VERSION = '0.203';
 use parent 'HTML::Widget::Plugin::Input';
 
 #pod =head1 SYNOPSIS
@@ -82,7 +82,7 @@ HTML::Widget::Plugin::Password - for SECRET input
 
 =head1 VERSION
 
-version 0.202
+version 0.203
 
 =head1 SYNOPSIS
 

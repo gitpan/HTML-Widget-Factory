@@ -2,7 +2,7 @@ use strict;
 use warnings;
 package HTML::Widget::Plugin::Textarea;
 # ABSTRACT: a widget for a large text entry box
-$HTML::Widget::Plugin::Textarea::VERSION = '0.202';
+$HTML::Widget::Plugin::Textarea::VERSION = '0.203';
 use parent 'HTML::Widget::Plugin';
 
 #pod =head1 SYNOPSIS
@@ -48,7 +48,8 @@ sub provided_widgets { qw(textarea) }
 #pod
 #pod =item value
 #pod
-#pod If this argument is given, the widget will be initially populated by its value.
+#pod If this argument is given and defined, the widget will be initially populated
+#pod by its value.
 #pod
 #pod =back
 #pod
@@ -66,9 +67,10 @@ sub textarea {
 
   my $widget = HTML::Element->new('textarea');
 
-  $widget->attr($_ => $arg->{attr}{$_}) for keys %{ $arg->{attr} };
+  $widget->attr($_ => $arg->{attr}{$_})
+    for grep {; defined $arg->{attr}{$_} } keys %{ $arg->{attr} };
 
-  $widget->push_content($arg->{value});
+  $widget->push_content($arg->{value}) if defined $arg->{value};
 
   return $widget->as_XML;
 }
@@ -102,7 +104,7 @@ HTML::Widget::Plugin::Textarea - a widget for a large text entry box
 
 =head1 VERSION
 
-version 0.202
+version 0.203
 
 =head1 SYNOPSIS
 
@@ -143,7 +145,8 @@ If true, this option indicates that the widget can't be changed by the user.
 
 =item value
 
-If this argument is given, the widget will be initially populated by its value.
+If this argument is given and defined, the widget will be initially populated
+by its value.
 
 =back
 

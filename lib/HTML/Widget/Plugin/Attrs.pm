@@ -2,7 +2,7 @@ use strict;
 use warnings;
 package HTML::Widget::Plugin::Attrs;
 # ABSTRACT: an HTML attribute string
-$HTML::Widget::Plugin::Attrs::VERSION = '0.202';
+$HTML::Widget::Plugin::Attrs::VERSION = '0.203';
 use parent 'HTML::Widget::Plugin';
 
 #pod =head1 DESCRIPTION
@@ -110,7 +110,7 @@ HTML::Widget::Plugin::Attrs - an HTML attribute string
 
 =head1 VERSION
 
-version 0.202
+version 0.203
 
 =head1 DESCRIPTION
 

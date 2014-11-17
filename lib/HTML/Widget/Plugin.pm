@@ -2,7 +2,7 @@ use strict;
 use warnings;
 package HTML::Widget::Plugin;
 # ABSTRACT: base class for HTML widgets
-$HTML::Widget::Plugin::VERSION = '0.202';
+$HTML::Widget::Plugin::VERSION = '0.203';
 use Carp ();
 use List::MoreUtils qw(uniq);
 use MRO::Compat;
@@ -142,7 +142,7 @@ HTML::Widget::Plugin - base class for HTML widgets
 
 =head1 VERSION
 
-version 0.202
+version 0.203
 
 =head1 DESCRIPTION
 

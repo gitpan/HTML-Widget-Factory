@@ -2,7 +2,7 @@ use strict;
 use warnings;
 package HTML::Widget::Plugin::Checkbox;
 # ABSTRACT: it's either [ ] or [x]
-$HTML::Widget::Plugin::Checkbox::VERSION = '0.202';
+$HTML::Widget::Plugin::Checkbox::VERSION = '0.203';
 use parent 'HTML::Widget::Plugin';
 
 #pod =head1 SYNOPSIS
@@ -84,7 +84,7 @@ HTML::Widget::Plugin::Checkbox - it's either [ ] or [x]
 
 =head1 VERSION
 
-version 0.202
+version 0.203
 
 =head1 SYNOPSIS
 
